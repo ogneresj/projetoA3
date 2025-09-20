@@ -1,4 +1,4 @@
-package model2;
+package model;
 
 public class Usuario {
 
@@ -46,3 +46,4 @@ public class Usuario {
     //    this.interesses = interesses;
     //}
 }
+
