@@ -24,7 +24,7 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Chama o método que cuida do logout
+                // Chama o metodo que cuida do logout
                 handleLogout(); 
             }
         });
@@ -39,7 +39,7 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
     }
     
     /**
-     * O método que executa a ação de Desconectar (Logout).
+     * O metodo que executa a ação de Desconectar (Logout).
      */
     private void handleLogout() {
         // O passo mais importante: Fecha a janela atual (o Dashboard)

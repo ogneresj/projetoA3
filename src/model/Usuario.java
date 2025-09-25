@@ -31,9 +31,7 @@ public class Usuario {
         if(!interesses.contains(interesse)){
             interesses.add(interesse);
         }
-
     }
-
 
     public String getNome() {
         return nome;
@@ -62,6 +60,5 @@ public class Usuario {
     public List<String> getInteresses() {
         return new ArrayList<>(interesses);
     }
-
 }
 
