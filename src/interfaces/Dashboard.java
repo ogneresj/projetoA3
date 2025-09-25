@@ -7,10 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class Dashboard extends JFrame { // JFrame é a janela principol
-
-    public Dashboard() {
+    
+         public Dashboard() {
         // Configurações básicas da janela
         setTitle("Área do Usuário");
         setSize(400,300);
@@ -37,7 +36,7 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
         setLocationRelativeTo(null); 
         setVisible(true);
     }
-    
+
     /**
      * O método que executa a ação de Desconectar (Logout).
      */
@@ -47,8 +46,11 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
         
         // Opcional: Confirma o logout
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Opcional/Recomendado: Inicia o processo de login novamente
-        new Login(); 
+        }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new Dashboard(); // Cria e exibe a janela
+        });
+      }
     }
-}
