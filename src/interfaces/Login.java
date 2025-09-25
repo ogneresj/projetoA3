@@ -22,10 +22,4 @@ public class Login {
             new Login();
             }   
         }
-
-        // Método principal para iniciar o aplicativo
-    public static void main(String[] args) {
-        // new Login() inicia o fluxo de caixas de diálogo
-        new Login(); 
-    }
 }
