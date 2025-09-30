@@ -7,13 +7,15 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Dashboard extends JFrame { // JFrame é a janela principol
+// JFrame é a janela principol
+public class Dashboard extends JFrame { 
     
-         public Dashboard() {
+    // Construtor
+    public Dashboard() {
         // Configurações básicas da janela
-        setTitle("Área do Usuário");
-        setSize(400,300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Área do Usuário"); // texto que aparece na barra superior da sua janela
+        setSize(400,300); // define tamanho da janela
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
 
         // Criação Botão("Desconectar")
@@ -21,14 +23,14 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
 
         // Adiciona a Lógica de Desconexão
         botao.addActionListener(new ActionListener() {
-            @Override
+            @Override // Herança
             public void actionPerformed(ActionEvent e) {
-                // Chama o metodo que cuida do logout
+                // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
                 handleLogout(); 
             }
         });
 
-        // Adiciona os componentes à Janela
+        // Adiciona o Botão na Janela
         add(Box.createVerticalStrut(20)); 
         add(botao);
         
@@ -37,14 +39,11 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
         setVisible(true);
     }
 
-    /**
-     * O metodo que executa a ação de Desconectar (Logout).
-     */
-    private void handleLogout() {
-        // O passo mais importante: Fecha a janela atual (o Dashboard)
-        this.dispose(); 
-        
-        // Opcional: Confirma o logout
+    
+     // O método que executa a ação de Desconectar(Logout).
+     private void handleLogout() {
+         this.dispose(); //Fecha a janela atual (o Dashboard)
+         // Confirma o logout
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
-        }
+    }
 }
