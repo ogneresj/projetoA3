@@ -17,10 +17,10 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
 
         // Criação Botão("Desconectar")
-        JButton logoutButton = new JButton("Desconectar");
+        JButton botao = new JButton("Desconectar");
 
         // Adiciona a Lógica de Desconexão
-        logoutButton.addActionListener(new ActionListener() {
+        botao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Chama o metodo que cuida do logout
@@ -30,7 +30,7 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
 
         // Adiciona os componentes à Janela
         add(Box.createVerticalStrut(20)); 
-        add(logoutButton);
+        add(botao);
         
         // Exibe a Janela
         setLocationRelativeTo(null); 
@@ -47,10 +47,4 @@ public class Dashboard extends JFrame { // JFrame é a janela principol
         // Opcional: Confirma o logout
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
         }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Dashboard(); // Cria e exibe a janela
-        });
-      }
-    }
+}
