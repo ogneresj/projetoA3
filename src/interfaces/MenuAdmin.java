@@ -19,10 +19,10 @@ public class MenuAdmin extends JFrame {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
 
         // Criação Botão("Desconectar")
-        JButton botao = new JButton("Desconectar");
+        JButton botaoDesconectar = new JButton("Desconectar");
 
         // Adiciona a Lógica de Desconexão
-        botao.addActionListener(new ActionListener() {
+        botaoDesconectar.addActionListener(new ActionListener() {
             @Override // Herança
             public void actionPerformed(ActionEvent e) {
                 // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
@@ -32,7 +32,7 @@ public class MenuAdmin extends JFrame {
 
         // Adiciona o Botão na Janela
         add(Box.createVerticalStrut(20)); 
-        add(botao);
+        add(botaoDesconectar);
         
         // Exibe a Janela
         setLocationRelativeTo(null); 
