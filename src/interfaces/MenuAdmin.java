@@ -1,8 +1,5 @@
 package interfaces;
 
-
-// BOTÃO DE SAIR/DESCONECTAR
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +23,7 @@ public class MenuAdmin extends JFrame {
             @Override // Herança
             public void actionPerformed(ActionEvent e) {
                 // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
-                handleLogout(); 
+                handleLogout();
             }
         });
 
