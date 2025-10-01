@@ -1,14 +1,14 @@
 import javax.swing.SwingUtilities;
 
-import interfaces.Dashboard;
-import interfaces.Login;
+import interfaces.MenuAdmin;
+import interfaces.LoginAdmin;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         // inicia o fluxo de caixas de diálogo
-        new Login();
+        new LoginAdmin();
         SwingUtilities.invokeLater(() -> {
-            new Dashboard(); // Cria e exibe a janela
+            new MenuAdmin(); // Cria e exibe a janela
         });
       }
     }

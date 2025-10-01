@@ -1,17 +1,17 @@
 package interfaces;
 
-
-// BOTÃO DE SAIR/DESCONECTAR
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-// JFrame é a janela principol
-public class Dashboard extends JFrame { 
-    
+public class MenuUsuario extends JFrame {
+
     // Construtor
-    public Dashboard() {
+    public MenuUsuario() {
         // Configurações básicas da janela
         setTitle("Área do Usuário"); // texto que aparece na barra superior da sua janela
         setSize(400,300); // define tamanho da janela
@@ -47,3 +47,4 @@ public class Dashboard extends JFrame {
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 }
+
