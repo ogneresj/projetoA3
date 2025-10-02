@@ -1,6 +1,7 @@
 package interfaces;
 
 import service.ValidarLogin;
+import util.LimitText;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,9 +27,12 @@ public class TelaLogin extends JFrame {
         // Campos de digitalização da janela
         // Usuário
         JTextField campoUsuario = new JTextField();
+        campoUsuario.setDocument(new LimitText(20));
         campoUsuario.setBounds(70, 45, 200, 25);
+
         // Senha
         JPasswordField campoSenha = new JPasswordField();
+        campoSenha.setDocument(new LimitText(20));
         campoSenha.setBounds(70, 95, 200, 25);
 
         // Botão de Login
