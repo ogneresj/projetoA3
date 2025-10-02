@@ -1,5 +1,8 @@
 package interfaces;
 
+import service.ValidarLogin;
+import util.LimitText;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +25,14 @@ public class TelaLogin extends JFrame {
 
 
         // Campos de digitalização da janela
+        // Usuário
         JTextField campoUsuario = new JTextField();
+        campoUsuario.setDocument(new LimitText(20));
         campoUsuario.setBounds(70, 45, 200, 25);
 
+        // Senha
         JPasswordField campoSenha = new JPasswordField();
+        campoSenha.setDocument(new LimitText(20));
         campoSenha.setBounds(70, 95, 200, 25);
 
         // Botão de Login
@@ -35,13 +42,19 @@ public class TelaLogin extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String usuario = campoUsuario.getText();
+                // Pega o texto digitado em usuário a armazeno na variavel user.
+                String user = campoUsuario.getText();
+                // Pega a senha digitada em usuário e armazeno na variavel password
                 String password = new String(campoSenha.getPassword());
-                fazerVerificacao(usuario, password);
+
+                // A classe ValidarLogin e instanciada para fazer a verificação do login
+                ValidarLogin validarLogin = new ValidarLogin();
+                // Utilizando o metodo validar para testar o login e redirecionar ou para o menuAdmin() ou para menuUsuario()
+                validarLogin.validar(user, password);
             }
         });
 
-        // Adicionando os componentes extras
+        // Adicionando os componentes a tela de login
         add(campoSenha);
         add(textUsuario);
         add(textSenha);
@@ -52,22 +65,5 @@ public class TelaLogin extends JFrame {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
-    }
-
-    public void fazerVerificacao(String usuario, String password) {
-
-        // boolean admin = (usuario != null && usuario.equals("admin") &&  password != null && password.equals("admin"));
-        // boolean usuario = (usuario != null && usuario.equals("diego007@gmail.com") && password != null && password.equals("diego007"));
-
-        if (usuario != null && usuario.equals("admin") && password != null && password.equals("admin")) {
-            // Agora com a tela principal com o botão de logout
-            new MenuAdmin();
-        } else if (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario")) {
-            // Chama o construtor novamente para tentar fazer login de novo
-            new MenuUsuario();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
     }
 }
