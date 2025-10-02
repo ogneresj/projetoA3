@@ -3,13 +3,11 @@ package interfaces;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class TelaLogin extends JFrame {
 
-    //   = new ("Tela de Login");
-
     public TelaLogin(){
+        setTitle("Tela de login");
         // Tamanho da janela de login e onde ela irá aparecer na tela
         setBounds(600, 400, 350, 250);
 
@@ -65,11 +63,11 @@ public class TelaLogin extends JFrame {
         if (usuario != null && usuario.equals("admin") && password != null && password.equals("admin")) {
             // Agora com a tela principal com o botão de logout
             new MenuAdmin();
-        } else if (usuario != null && usuario.equals("diego007") && password != null && password.equals("diego007")) {
+        } else if (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario")) {
             // Chama o construtor novamente para tentar fazer login de novo
             new MenuUsuario();
         } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou password inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
