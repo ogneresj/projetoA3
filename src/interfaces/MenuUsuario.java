@@ -13,7 +13,7 @@ public class MenuUsuario extends JFrame {
     // Construtor
     public MenuUsuario() {
         // Configurações básicas da janela
-        setTitle("Área do Usuário"); // texto que aparece na barra superior da sua janela
+        setTitle("Menu de Usuário"); // texto que aparece na barra superior da sua janela
         setSize(400,300); // define tamanho da janela
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
@@ -23,7 +23,7 @@ public class MenuUsuario extends JFrame {
 
         // Adiciona a Lógica de Desconexão
         botao.addActionListener(new ActionListener() {
-            @Override // Herança
+            @Override // Sobrescrevendo o metodo
             public void actionPerformed(ActionEvent e) {
                 // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
                 handleLogout(); 
@@ -40,7 +40,7 @@ public class MenuUsuario extends JFrame {
     }
 
     
-     // O método que executa a ação de Desconectar(Logout).
+     // O metodo que executa a ação de Desconectar(Logout).
      private void handleLogout() {
          this.dispose(); //Fecha a janela atual (o Dashboard)
          // Confirma o logout
