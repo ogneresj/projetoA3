@@ -1,7 +1,7 @@
 package service;
 
-import interfaces.MenuAdmin;
-import interfaces.MenuUsuario;
+import view.MenuAdmin;
+import view.MenuUsuario;
 
 import javax.swing.*;
 

@@ -1,7 +1,8 @@
-package interfaces;
+package view;
+
+import model.Menu;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -9,11 +10,12 @@ import javax.swing.JOptionPane;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 
-public class MenuUsuario extends JFrame {
+public class MenuUsuario extends Menu {
     private JCheckBox iaResponsavel, ciberseguranca, privacidade;
 
     // Construtor
     public MenuUsuario() {
+<<<<<<< HEAD:src/interfaces/MenuUsuario.java
         setTitle("Área do Usuário"); 
         setSize(400,300); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -39,20 +41,29 @@ public class MenuUsuario extends JFrame {
                 handleLogout(); 
             }
         });
+=======
+        super("Tela de Usuário");
 
-        add(Box.createVerticalStrut(20)); 
-        add(botao);
+        // Botão para abrir Escolhas
+        JButton botaoEscolhas = new JButton("Escolher Categorias");
+        botaoEscolhas.addActionListener(e -> Escolhas());
+>>>>>>> db424c79fdb07f0ba0014164049e9501ab21c1c8:src/view/MenuUsuario.java
+
+        add(Box.createVerticalStrut(20));
         add(Box.createVerticalStrut(10));
         add(botaoEscolhas);
+        }
 
-        setLocationRelativeTo(null); 
-        setVisible(true);
+        // Exibe a Janela
+        public void exibeJanela() {
+            setLocationRelativeTo(null);
+            setVisible(true);
     }
 
     // Tela de escolhas
-    public void Escolhas () {
+    public void Escolhas() {
         JFrame frameEscolhas = new JFrame("Categorias do Usuário");
-        frameEscolhas.setSize(300,200);
+        frameEscolhas.setSize(300, 200);
         frameEscolhas.setLayout(new FlowLayout());
 
         // Opções
@@ -70,7 +81,7 @@ public class MenuUsuario extends JFrame {
             if (contador > 2) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false); // desfaz a seleção
-                JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!","Limite de escolhas",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!", "Limite de escolhas", JOptionPane.WARNING_MESSAGE);
             }
         };
 
@@ -100,18 +111,20 @@ public class MenuUsuario extends JFrame {
         frameEscolhas.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MenuUsuario();
-    }
+    // O metodo que executa a ação de Desconectar(Logout).
+    private void handleLogout () {
+        this.dispose(); //Fecha a janela atual (o Dashboard)
+        // Confirma o logout
 
+<<<<<<< HEAD:src/interfaces/MenuUsuario.java
     
     
      // O metodo que executa a ação de Desconectar(Logout).
      private void handleLogout() {
          this.dispose(); //Fecha a janela atual (o Dashboard)
          // Confirma o logout
+=======
+>>>>>>> db424c79fdb07f0ba0014164049e9501ab21c1c8:src/view/MenuUsuario.java
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 }
-
-
