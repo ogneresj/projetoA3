@@ -6,12 +6,50 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Recurso {
+        private String titulo;
+        private String autor;
+        private String categoria;
+    
+
+    public Recurso(String titulo, String autor, String categoria) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.categoria = categoria;
+    }
+    
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    @Override
+    public String toString() {
+        return titulo + " | " + autor + " | " + categoria;
+    }
+}
 
 public class MenuUsuario extends Menu {
     private JCheckBox iaResponsavel, ciberseguranca, privacidade;
+    private ArrayList<Recurso> listaRecursos = new ArrayList<>(); // lista para salvar cadastros
 
     // Construtor
     public MenuUsuario() {
@@ -83,11 +121,65 @@ public class MenuUsuario extends Menu {
         frameEscolhas.setVisible(true);
     }
 
+    // Cadastro de recursos
+    private void cadastrarRecurso() {
+        JTextField campoTitulo = new JTextField(15);
+        JTextField campoAutor = new JTextField(15);
+        JTextField campoCategoria = new JTextField(15);
+
+        JPanel painel = new JPanel(new GridLayout(3, 2));
+        painel.add(new JLabel("Título:"));
+        painel.add(campoTitulo);
+        painel.add(new JLabel("Autor:"));
+        painel.add(campoAutor);
+        painel.add(new JLabel("Categoria:"));
+        painel.add(campoCategoria);
+
+        int resultado = JOptionPane.showConfirmDialog(null, painel,
+                "Cadastro de Recurso", JOptionPane.OK_CANCEL_OPTION);
+
+        if (resultado == JOptionPane.OK_OPTION) {
+            String titulo = campoTitulo.getText().trim();
+            String autor = campoAutor.getText().trim();
+            String categoria = campoCategoria.getText().trim();
+
+            if (!titulo.isEmpty() && !autor.isEmpty() && !categoria.isEmpty()) {
+                listaRecursos.add(new Recurso(titulo, autor, categoria));
+                JOptionPane.showMessageDialog(null, "Recurso cadastrado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    // Visualização dos recursos em ordem alfabética
+    private void visualizarRecursos() {
+        if (listaRecursos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum recurso cadastrado.");
+            return;
+        }
+
+        // Ordena por título
+        Collections.sort(listaRecursos, Comparator.comparing(Recurso::getTitulo));
+
+        StringBuilder sb = new StringBuilder("Lista de Recursos:\n\n");
+        for (Recurso r : listaRecursos) {
+            sb.append(r.toString()).append("\n");
+        }
+
+        JOptionPane.showMessageDialog(null, sb.toString(),
+                "Recursos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     // O metodo que executa a ação de Desconectar(Logout).
     private void handleLogout () {
         this.dispose(); //Fecha a janela atual (o Dashboard)
         // Confirma o logout
-
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void main(String[] args) {
+        new MenuUsuario();
     }
 }
