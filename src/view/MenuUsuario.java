@@ -1,7 +1,8 @@
-package interfaces;
+package view;
+
+import model.Menu;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -9,57 +10,32 @@ import javax.swing.JOptionPane;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 
-public class MenuUsuario extends JFrame {
+public class MenuUsuario extends Menu {
     private JCheckBox iaResponsavel, ciberseguranca, privacidade;
 
     // Construtor
     public MenuUsuario() {
-<<<<<<< HEAD
-        setTitle("Área do Usuário"); 
-        setSize(400,300); 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); 
-=======
-        // Configurações básicas da janela
-        setTitle("Menu de Usuário"); // texto que aparece na barra superior da sua janela
-        setSize(400,300); // define tamanho da janela
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
->>>>>>> e393202486afc1d4bdbe106d52ff84de7fdd6447
+        super("Tela de Usuário");
 
-        // Botão "Desconectar"
-        JButton botao = new JButton("Desconectar");
-        botao.addActionListener(e -> handleLogout());
-
-<<<<<<< HEAD
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
         botaoEscolhas.addActionListener(e -> Escolhas());
-=======
-        // Adiciona a Lógica de Desconexão
-        botao.addActionListener(new ActionListener() {
-            @Override // Sobrescrevendo o metodo
-            public void actionPerformed(ActionEvent e) {
-                // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
-                handleLogout(); 
-            }
-        });
->>>>>>> e393202486afc1d4bdbe106d52ff84de7fdd6447
 
-        add(Box.createVerticalStrut(20)); 
-        add(botao);
+        add(Box.createVerticalStrut(20));
         add(Box.createVerticalStrut(10));
         add(botaoEscolhas);
+        }
 
-        setLocationRelativeTo(null); 
-        setVisible(true);
+        // Exibe a Janela
+        public void exibeJanela() {
+            setLocationRelativeTo(null);
+            setVisible(true);
     }
 
-<<<<<<< HEAD
     // Tela de escolhas
-    public void Escolhas () {
+    public void Escolhas() {
         JFrame frameEscolhas = new JFrame("Categorias do Usuário");
-        frameEscolhas.setSize(300,200);
+        frameEscolhas.setSize(300, 200);
         frameEscolhas.setLayout(new FlowLayout());
 
         // Opções
@@ -77,7 +53,7 @@ public class MenuUsuario extends JFrame {
             if (contador > 2) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false); // desfaz a seleção
-                JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!","Limite de escolhas",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!", "Limite de escolhas", JOptionPane.WARNING_MESSAGE);
             }
         };
 
@@ -107,21 +83,11 @@ public class MenuUsuario extends JFrame {
         frameEscolhas.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MenuUsuario();
-    }
+    // O metodo que executa a ação de Desconectar(Logout).
+    private void handleLogout () {
+        this.dispose(); //Fecha a janela atual (o Dashboard)
+        // Confirma o logout
 
-    private void handleLogout() {
-        this.dispose(); 
-=======
-    
-     // O metodo que executa a ação de Desconectar(Logout).
-     private void handleLogout() {
-         this.dispose(); //Fecha a janela atual (o Dashboard)
-         // Confirma o logout
->>>>>>> e393202486afc1d4bdbe106d52ff84de7fdd6447
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 }
-
-

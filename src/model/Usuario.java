@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Usuario {
 
     private String nome;
@@ -35,6 +37,5 @@ public class Usuario {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-
 }
 

@@ -1,4 +1,4 @@
-package interfaces;
+package view;
 
 import service.ValidarLogin;
 import util.LimitText;
@@ -62,8 +62,9 @@ public class TelaLogin extends JFrame {
         add(botaoLogin);
 
         // Configurações da janela de login
+        setResizable(false); // Este metodo não deixa redimensionar a janela
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Assim que clicar no "X" para fechar a janela, ele para a aplicação
+        setVisible(true); // Torna a janela visivel
     }
 }
