@@ -2,33 +2,24 @@ package view;
 
 import model.Menu;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.GridLayout;
+import javax.swing.*;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
+
 
 class Recurso {
-        private String titulo;
-        private String autor;
-        private String categoria;
-    
+    private String titulo;
+    private String autor;
+    private String categoria;
 
     public Recurso(String titulo, String autor, String categoria) {
         this.titulo = titulo;
         this.autor = autor;
         this.categoria = categoria;
     }
-    
+
     public String getTitulo() {
         return titulo;
     }
@@ -59,15 +50,26 @@ public class MenuUsuario extends Menu {
         JButton botaoEscolhas = new JButton("Escolher Categorias");
         botaoEscolhas.addActionListener(e -> Escolhas());
 
-        add(Box.createVerticalStrut(20));
-        add(Box.createVerticalStrut(10));
-        add(botaoEscolhas);
-        }
+        // Botão para cadastrar recurso
+        JButton botaoCadastro = new JButton("Cadastrar Recurso");
+        botaoCadastro.addActionListener(e -> cadastrarRecurso());
 
-        // Exibe a Janela
-        public void exibeJanela() {
-            setLocationRelativeTo(null);
-            setVisible(true);
+        // Botão para visualizar recurso
+        JButton botaoVisualizar = new JButton("Visualizar Recursos");
+        botaoVisualizar.addActionListener(e -> visualizarRecursos());
+
+        add(Box.createVerticalStrut(20));
+        add(botaoEscolhas);
+        add(Box.createVerticalStrut(10));
+        add(botaoCadastro);
+        add(Box.createVerticalStrut(10));
+        add(botaoVisualizar);
+    }
+
+    // Exibe a Janela
+    public void exibeJanela() {
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // Tela de escolhas
@@ -90,8 +92,11 @@ public class MenuUsuario extends Menu {
 
             if (contador > 2) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
-                fonte.setSelected(false); // desfaz a seleção
-                JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!", "Limite de escolhas", JOptionPane.WARNING_MESSAGE);
+                fonte.setSelected(false);
+                JOptionPane.showMessageDialog(frameEscolhas,
+                        "Você só pode escolher até 2 opções!",
+                        "Limite de escolhas",
+                        JOptionPane.WARNING_MESSAGE);
             }
         };
 
@@ -108,10 +113,15 @@ public class MenuUsuario extends Menu {
             if (ciberseguranca.isSelected()) escolhas += "- Cibersegurança\n";
             if (privacidade.isSelected()) escolhas += "- Privacidade & Ética Digital\n";
 
-            JOptionPane.showMessageDialog(frameEscolhas, escolhas);
+            if (escolhas.equals("Você escolheu:\n")) {
+                JOptionPane.showMessageDialog(frameEscolhas,
+                        "Nenhuma opção escolhida!",
+                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frameEscolhas, escolhas);
+            }
         });
 
-        // Adicionando os componentes na tela
         frameEscolhas.add(iaResponsavel);
         frameEscolhas.add(ciberseguranca);
         frameEscolhas.add(privacidade);
@@ -160,7 +170,6 @@ public class MenuUsuario extends Menu {
             return;
         }
 
-        // Ordena por título
         Collections.sort(listaRecursos, Comparator.comparing(Recurso::getTitulo));
 
         StringBuilder sb = new StringBuilder("Lista de Recursos:\n\n");
@@ -172,14 +181,15 @@ public class MenuUsuario extends Menu {
                 "Recursos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // O metodo que executa a ação de Desconectar(Logout).
-    private void handleLogout () {
-        this.dispose(); //Fecha a janela atual (o Dashboard)
-        // Confirma o logout
-        JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
+    // Método de logout
+    private void handleLogout() {
+        this.dispose();
+        JOptionPane.showMessageDialog(null,
+                "Você foi desconectado com sucesso.",
+                "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {
-        new MenuUsuario();
+        new MenuUsuario().exibeJanela();
     }
 }
