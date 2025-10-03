@@ -7,5 +7,6 @@ public class Main {
         // inicia o fluxo de caixas de diálogo]
         // invokeLater é o metodo responsável por não travar a aplicação
         SwingUtilities.invokeLater(TelaLogin::new);
+        System.out.println("Hello, World");
       }
     }

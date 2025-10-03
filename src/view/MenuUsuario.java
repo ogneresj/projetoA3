@@ -15,39 +15,11 @@ public class MenuUsuario extends Menu {
 
     // Construtor
     public MenuUsuario() {
-<<<<<<< HEAD:src/interfaces/MenuUsuario.java
-        setTitle("Área do Usuário"); 
-        setSize(400,300); 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); 
-        // Configurações básicas da janela
-        setTitle("Menu de Usuário"); // texto que aparece na barra superior da sua janela
-        setSize(400,300); // define tamanho da janela
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
-
-        // Botão "Desconectar"
-        JButton botao = new JButton("Desconectar");
-        botao.addActionListener(e -> handleLogout());
-
-        // Botão para abrir Escolhas
-        JButton botaoEscolhas = new JButton("Escolher Categorias");
-        botaoEscolhas.addActionListener(e -> Escolhas());
-        // Adiciona a Lógica de Desconexão
-        botao.addActionListener(new ActionListener() {
-            @Override // Sobrescrevendo o metodo
-            public void actionPerformed(ActionEvent e) {
-                // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
-                handleLogout(); 
-            }
-        });
-=======
         super("Tela de Usuário");
 
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
         botaoEscolhas.addActionListener(e -> Escolhas());
->>>>>>> db424c79fdb07f0ba0014164049e9501ab21c1c8:src/view/MenuUsuario.java
 
         add(Box.createVerticalStrut(20));
         add(Box.createVerticalStrut(10));
@@ -116,15 +88,6 @@ public class MenuUsuario extends Menu {
         this.dispose(); //Fecha a janela atual (o Dashboard)
         // Confirma o logout
 
-<<<<<<< HEAD:src/interfaces/MenuUsuario.java
-    
-    
-     // O metodo que executa a ação de Desconectar(Logout).
-     private void handleLogout() {
-         this.dispose(); //Fecha a janela atual (o Dashboard)
-         // Confirma o logout
-=======
->>>>>>> db424c79fdb07f0ba0014164049e9501ab21c1c8:src/view/MenuUsuario.java
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 }
