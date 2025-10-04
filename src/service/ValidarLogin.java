@@ -1,8 +1,5 @@
 package service;
 
-import view.MenuAdmin;
-import view.MenuUsuario;
-
 import javax.swing.*;
 
 // Classe Principal

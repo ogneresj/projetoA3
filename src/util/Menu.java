@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,11 +12,10 @@ public class Menu extends JFrame {
         // Configurações básicas da janela
         setTitle(tituloDaJanela); // texto que aparece na barra superior da sua janela
         setSize(400,300); // define tamanho da janela
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Layout vertical simples
 
         // Criação Botão("Desconectar")
         JButton botaoDesconectar = new JButton("Desconectar");
+        botaoDesconectar.setBounds(250,220,120,20);
 
         // Adiciona a Lógica de Desconexão
         botaoDesconectar.addActionListener(new ActionListener() {
@@ -28,11 +27,13 @@ public class Menu extends JFrame {
         });
 
         // Adiciona o Botão na Janela
-        add(Box.createVerticalStrut(20));
         add(botaoDesconectar);
 
+        setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
+        setLayout(null);
+        setVisible(true); // Exibe a janela
     }
 
     // O metodo que executa a ação de Desconectar(Logout).
