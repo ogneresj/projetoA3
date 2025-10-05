@@ -1,7 +1,7 @@
 package service;
 
-import view.InterfaceAdmin;
-import view.InterfaceUsuario;
+import view.admin.InterfaceAdmin;
+import view.user.InterfaceUsuario;
 
 import javax.swing.*;
 

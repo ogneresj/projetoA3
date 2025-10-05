@@ -1,4 +1,4 @@
-package view;
+package view.user;
 import util.Menu;
 
 import javax.swing.*;
@@ -14,6 +14,7 @@ public class InterfaceUsuario extends Menu {
 
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
+        botaoEscolhas.setBounds(250,220,120,20);
 
         botaoEscolhas.addActionListener(e -> Escolhas());
 
@@ -73,12 +74,5 @@ public class InterfaceUsuario extends Menu {
 
         frameEscolhas.setLocationRelativeTo(null);
         frameEscolhas.setVisible(true);
-    }
-
-    // O metodo que executa a ação de Desconectar(Logout).
-    private void handleLogout () {
-        this.dispose(); //Fecha a janela atual (o Dashboard)
-        // Confirma o logout
-        JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 }

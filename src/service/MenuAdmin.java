@@ -1,10 +1,13 @@
 package service;
 
+import model.Usuario;
+import view.admin.TelaCriarUsuario;
+
 // JFrame é a janela principol
 public class MenuAdmin {
 
-    public void cadastrarUsuarios() {
-        System.out.println("Cadastro feito com sucesso");
+    public void cadastrarUsuarios(String usuario, String senha, boolean tipoUsuario ) {
+
     }
 
     public void editarUsuario() {

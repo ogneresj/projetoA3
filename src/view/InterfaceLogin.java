@@ -23,7 +23,6 @@ public class InterfaceLogin extends JFrame {
         JLabel textSenha = new JLabel("Senha: ");
         textSenha.setBounds(70, 70, 100,30);
 
-
         // Campos de digitalização da janela
         // Usuário
         JTextField campoUsuario = new JTextField();

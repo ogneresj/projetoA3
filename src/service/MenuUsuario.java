@@ -85,7 +85,7 @@ public class MenuUsuario extends Menu {
     }
 
     // O metodo que executa a ação de Desconectar(Logout).
-    private void handleLogout () {
+    public void handleLogout () {
         this.dispose(); //Fecha a janela atual (o Dashboard)
         // Confirma o logout
         JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);

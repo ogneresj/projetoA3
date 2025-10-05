@@ -22,7 +22,7 @@ public class Menu extends JFrame {
             @Override // Herança
             public void actionPerformed(ActionEvent e) {
                 // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
-                handleLogout();
+                dispose();
             }
         });
 
@@ -34,12 +34,5 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura o "X" que o usuário clicar, encerra a janela
         setLayout(null);
         setVisible(true); // Exibe a janela
-    }
-
-    // O metodo que executa a ação de Desconectar(Logout).
-    private void handleLogout() {
-        this.dispose(); //Fecha a janela atual (o Dashboard)
-        // Confirma o logout
-        JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
     }
 }

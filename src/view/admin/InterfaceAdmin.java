@@ -1,4 +1,4 @@
-package view;
+package view.admin;
 
 import service.MenuAdmin;
 import util.Menu;
@@ -30,7 +30,7 @@ public class InterfaceAdmin extends Menu {
 
         // Adiciona a Lógica de Desconexão
         botaoCadastrar.addActionListener(e ->
-                menuAdmin.cadastrarUsuarios());
+                new TelaCriarUsuario());
 
         botaoEditarUsuario.addActionListener(e ->
                 menuAdmin.editarUsuario());
