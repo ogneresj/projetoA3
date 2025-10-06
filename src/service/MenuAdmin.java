@@ -7,7 +7,7 @@ import view.admin.TelaCriarUsuario;
 public class MenuAdmin {
 
     public void cadastrarUsuarios(String usuario, String senha, boolean tipoUsuario ) {
-
+        
     }
 
     public void editarUsuario() {
