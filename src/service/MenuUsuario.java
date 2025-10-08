@@ -53,10 +53,6 @@ public class MenuUsuario extends Menu {
 
         add(Box.createVerticalStrut(20));
         add(botaoEscolhas);
-        add(Box.createVerticalStrut(10));
-        add(botaoCadastro);
-        add(Box.createVerticalStrut(10));
-        add(botaoVisualizar);
     }
 
     // Exibe a Janela
