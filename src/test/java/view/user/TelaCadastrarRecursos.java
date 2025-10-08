@@ -1,5 +1,7 @@
 package view.user;
 
+import service.MenuUsuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,20 +21,16 @@ public class TelaCadastrarRecursos extends JFrame {
         JLabel autorLabel = new JLabel("Autor: ");
         JTextField campoAutor = new JTextField(15);
 
-        JLabel categoriaLabel = new JLabel("Categoria: ");
-        categoriaLabel.setBounds(120, 150, 300,30);
-        String[] categoria = {"IA Responsável", "Cibersegurança", "Privacidade & Ética Digital"};
-        JComboBox<String> categoriaList = new JComboBox<>(categoria);
-        categoriaList.setBounds(120, 177,200,20);
-
-
         JButton botaoCadastrarRecurso = new JButton("Cadastrar Recursos");
         JButton botaoDesconectar = new JButton("Desconectar");
+
+        JLabel categoriaLabel = new JLabel("Categoria: ");
+        String[] categoria = {"IA Responsável", "Cibersegurança", "Privacidade & Ética Digital"};
+        JComboBox<String> categoriaList = new JComboBox<>(categoria);
 
         Container painel = telaCadastrarRecursos.getContentPane();
         painel.setLayout(new GridLayout(5,2,5,5) {
         });
-        //painel.add(textTitle);
 
         painel.add(tituloLabel);
         painel.add(campoTitulo);
@@ -50,7 +48,8 @@ public class TelaCadastrarRecursos extends JFrame {
         botaoCadastrarRecurso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e){
-
+                MenuUsuario menuUsuario = new MenuUsuario();
+                menuUsuario.cadastrarRecurso();
             }
         });
 

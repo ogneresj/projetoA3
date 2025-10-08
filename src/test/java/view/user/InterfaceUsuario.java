@@ -1,13 +1,12 @@
 package view.user;
+import util.Menu;
 import java.awt.FlowLayout;
 import java.awt.event.ItemListener;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import util.Menu;
 
 public class InterfaceUsuario extends Menu {
     private JCheckBox iaResponsavel, ciberseguranca, privacidade;
@@ -18,20 +17,19 @@ public class InterfaceUsuario extends Menu {
 
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
-        botaoEscolhas.setBounds(250,200,120,20);
+        botaoEscolhas.setBounds(90,40,180,20);
 
         JButton botaoCadastrarRecurso = new JButton("Cadastrar Recurso");
-        botaoCadastrarRecurso.setBounds(250,150,120,20);
+        botaoCadastrarRecurso.setBounds(90,70,180,20);
 
-        botaoCadastrarRecurso.add(botaoCadastrarRecurso);
+        botaoCadastrarRecurso.addActionListener(e ->
+                new TelaCadastrarRecursos());
 
-        botaoCadastrarRecurso.addActionListener(e -> new TelaCadastrarRecursos());
+        botaoEscolhas.addActionListener(e ->
+                Escolhas());
 
-        botaoEscolhas.addActionListener(e -> Escolhas());
-
-        add(Box.createVerticalStrut(20));
+        add(botaoCadastrarRecurso);
         add(botaoEscolhas);
-        setVisible(true);
     }
 
     // Tela de escolhas

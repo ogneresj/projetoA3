@@ -5,7 +5,7 @@ import model.Usuario;
 // JFrame é a janela principol
 public class MenuAdmin {
 
-    public void cadastrarUsuarios(String usuario, String senha, boolean tipoUsuario ) {
+    public void cadastrarUsuarios(String usuario, int idade, String senha, boolean tipoUsuario ) {
         
     }
 
