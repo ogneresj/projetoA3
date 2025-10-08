@@ -22,8 +22,10 @@ public class InterfaceUsuario extends Menu {
         add(Box.createVerticalStrut(10));
         add(botaoEscolhas);
 
+        setLocationRelativeTo(null);
         setVisible(true);
     }
+
 
     // Tela de escolhas
     public void Escolhas() {
@@ -43,7 +45,7 @@ public class InterfaceUsuario extends Menu {
             if (ciberseguranca.isSelected()) contador++;
             if (privacidade.isSelected()) contador++;
 
-            if (contador > 2) {
+            if (contador > 1) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false); // desfaz a seleção
                 JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!", "Limite de escolhas", JOptionPane.WARNING_MESSAGE);
