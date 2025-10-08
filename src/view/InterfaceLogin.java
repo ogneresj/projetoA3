@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaLogin extends JFrame {
+public class InterfaceLogin extends JFrame {
 
-    public TelaLogin(){
+    public InterfaceLogin(){
         setTitle("Tela de login");
         // Tamanho da janela de login e onde ela irá aparecer na tela
         setBounds(600, 400, 350, 250);
@@ -22,7 +22,6 @@ public class TelaLogin extends JFrame {
         // Senha
         JLabel textSenha = new JLabel("Senha: ");
         textSenha.setBounds(70, 70, 100,30);
-
 
         // Campos de digitalização da janela
         // Usuário

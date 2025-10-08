@@ -1,7 +1,7 @@
 package service;
 
-import view.MenuAdmin;
-import view.MenuUsuario;
+import view.admin.InterfaceAdmin;
+import view.user.InterfaceUsuario;
 
 import javax.swing.*;
 
@@ -16,10 +16,10 @@ public class ValidarLogin {
 
         if (usuario != null && usuario.equals("admin") &&  password != null && password.equals("admin")) {
             // Agora com a tela principal com o botão de logout
-            new MenuAdmin();
+            new InterfaceAdmin();
         } else if (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario")) {
             // Chama o construtor novamente para tentar fazer login de novo
-            new MenuUsuario();
+            new InterfaceUsuario();
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou password inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
