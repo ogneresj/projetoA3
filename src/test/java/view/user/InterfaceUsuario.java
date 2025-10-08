@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import util.Menu;
 
 public class InterfaceUsuario extends Menu {
@@ -19,12 +18,20 @@ public class InterfaceUsuario extends Menu {
 
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
-        botaoEscolhas.setBounds(250, 220, 120, 20);
+        botaoEscolhas.setBounds(250,200,120,20);
+
+        JButton botaoCadastrarRecurso = new JButton("Cadastrar Recurso");
+        botaoCadastrarRecurso.setBounds(250,150,120,20);
+
+        botaoCadastrarRecurso.add(botaoCadastrarRecurso);
+
+        botaoCadastrarRecurso.addActionListener(e -> new TelaCadastrarRecursos());
 
         botaoEscolhas.addActionListener(e -> Escolhas());
 
         add(Box.createVerticalStrut(20));
         add(botaoEscolhas);
+        setVisible(true);
     }
 
     // Tela de escolhas
@@ -49,7 +56,7 @@ public class InterfaceUsuario extends Menu {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false);
                 JOptionPane.showMessageDialog(frameEscolhas,
-                        "Você só pode escolher até 2 opções!",
+                        "Você só pode escolher 1 opção",
                         "Limite de escolhas",
                         JOptionPane.WARNING_MESSAGE);
             }

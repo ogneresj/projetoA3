@@ -23,6 +23,7 @@ public class Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // executa a lógica para "fazer o logout" ou encerrar uma sessão à cada vez que o botão for acionado
                 dispose();
+                JOptionPane.showMessageDialog(null, "Desconectado com sucesso!");
             }
         });
 
