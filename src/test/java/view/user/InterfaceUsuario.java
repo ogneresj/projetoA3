@@ -14,18 +14,13 @@ public class InterfaceUsuario extends Menu {
 
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
-        botaoEscolhas.setBounds(250,220,120,20);
+        botaoEscolhas.setBounds(250, 220, 120, 20);
 
         botaoEscolhas.addActionListener(e -> Escolhas());
 
         add(Box.createVerticalStrut(20));
-        add(Box.createVerticalStrut(10));
         add(botaoEscolhas);
-
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
-
 
     // Tela de escolhas
     public void Escolhas() {
@@ -47,8 +42,11 @@ public class InterfaceUsuario extends Menu {
 
             if (contador > 1) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
-                fonte.setSelected(false); // desfaz a seleção
-                JOptionPane.showMessageDialog(frameEscolhas, "Você só pode escolher até 2 opções!", "Limite de escolhas", JOptionPane.WARNING_MESSAGE);
+                fonte.setSelected(false);
+                JOptionPane.showMessageDialog(frameEscolhas,
+                        "Você só pode escolher até 2 opções!",
+                        "Limite de escolhas",
+                        JOptionPane.WARNING_MESSAGE);
             }
         };
 
@@ -65,10 +63,15 @@ public class InterfaceUsuario extends Menu {
             if (ciberseguranca.isSelected()) escolhas += "- Cibersegurança\n";
             if (privacidade.isSelected()) escolhas += "- Privacidade & Ética Digital\n";
 
-            JOptionPane.showMessageDialog(frameEscolhas, escolhas);
+            if (escolhas.equals("Você escolheu:\n")) {
+                JOptionPane.showMessageDialog(frameEscolhas,
+                        "Nenhuma opção escolhida!",
+                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frameEscolhas, escolhas);
+            }
         });
 
-        // Adicionando os componentes na tela
         frameEscolhas.add(iaResponsavel);
         frameEscolhas.add(ciberseguranca);
         frameEscolhas.add(privacidade);
@@ -78,3 +81,4 @@ public class InterfaceUsuario extends Menu {
         frameEscolhas.setVisible(true);
     }
 }
+
