@@ -1,50 +1,17 @@
 package view.user;
-import util.Menu;
-
-import javax.swing.*;
-<<<<<<< HEAD:src/service/MenuUsuario.java
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.*;
-import java.util.*;
-
-
-class Recurso {
-    private String titulo;
-    private String autor;
-    private String categoria;
-
-    public Recurso(String titulo, String autor, String categoria) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.categoria = categoria;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    @Override
-    public String toString() {
-        return titulo + " | " + autor + " | " + categoria;
-    }
-}
-=======
-import java.awt.*;
 import java.awt.event.ItemListener;
->>>>>>> c8069301ce6e926d3af44c0611f43fd283756c17:src/test/java/view/user/InterfaceUsuario.java
+
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import util.Menu;
 
 public class InterfaceUsuario extends Menu {
     private JCheckBox iaResponsavel, ciberseguranca, privacidade;
-    private ArrayList<Recurso> listaRecursos = new ArrayList<>(); // lista para salvar cadastros
 
     // Construtor
     public InterfaceUsuario() {
@@ -58,15 +25,6 @@ public class InterfaceUsuario extends Menu {
 
         add(Box.createVerticalStrut(20));
         add(botaoEscolhas);
-<<<<<<< HEAD:src/service/MenuUsuario.java
-    }
-
-    // Exibe a Janela
-    public void exibeJanela() {
-        setLocationRelativeTo(null);
-        setVisible(true);
-=======
->>>>>>> c8069301ce6e926d3af44c0611f43fd283756c17:src/test/java/view/user/InterfaceUsuario.java
     }
 
     // Tela de escolhas
