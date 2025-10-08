@@ -1,8 +1,8 @@
-package service;
-
+package view.user;
 import util.Menu;
 
 import javax.swing.*;
+<<<<<<< HEAD:src/service/MenuUsuario.java
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
@@ -37,28 +37,36 @@ class Recurso {
         return titulo + " | " + autor + " | " + categoria;
     }
 }
+=======
+import java.awt.*;
+import java.awt.event.ItemListener;
+>>>>>>> c8069301ce6e926d3af44c0611f43fd283756c17:src/test/java/view/user/InterfaceUsuario.java
 
-public class MenuUsuario extends Menu {
+public class InterfaceUsuario extends Menu {
     private JCheckBox iaResponsavel, ciberseguranca, privacidade;
     private ArrayList<Recurso> listaRecursos = new ArrayList<>(); // lista para salvar cadastros
 
     // Construtor
-    public MenuUsuario() {
+    public InterfaceUsuario() {
         super("Tela de Usuário");
 
         // Botão para abrir Escolhas
         JButton botaoEscolhas = new JButton("Escolher Categorias");
+        botaoEscolhas.setBounds(250, 220, 120, 20);
 
         botaoEscolhas.addActionListener(e -> Escolhas());
 
         add(Box.createVerticalStrut(20));
         add(botaoEscolhas);
+<<<<<<< HEAD:src/service/MenuUsuario.java
     }
 
     // Exibe a Janela
     public void exibeJanela() {
         setLocationRelativeTo(null);
         setVisible(true);
+=======
+>>>>>>> c8069301ce6e926d3af44c0611f43fd283756c17:src/test/java/view/user/InterfaceUsuario.java
     }
 
     // Tela de escolhas
@@ -79,7 +87,7 @@ public class MenuUsuario extends Menu {
             if (ciberseguranca.isSelected()) contador++;
             if (privacidade.isSelected()) contador++;
 
-            if (contador > 2) {
+            if (contador > 1) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false);
                 JOptionPane.showMessageDialog(frameEscolhas,
@@ -119,11 +127,5 @@ public class MenuUsuario extends Menu {
         frameEscolhas.setLocationRelativeTo(null);
         frameEscolhas.setVisible(true);
     }
-
-    // O metodo que executa a ação de Desconectar(Logout).
-    public void handleLogout () {
-        this.dispose(); //Fecha a janela atual (o Dashboard)
-        // Confirma o logout
-        JOptionPane.showMessageDialog(null, "Você foi desconectado com sucesso.", "Logout", JOptionPane.INFORMATION_MESSAGE);
-    }
 }
+

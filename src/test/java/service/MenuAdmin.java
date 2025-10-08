@@ -1,7 +1,6 @@
 package service;
 
 import model.Usuario;
-import view.admin.TelaCriarUsuario;
 
 // JFrame é a janela principol
 public class MenuAdmin {

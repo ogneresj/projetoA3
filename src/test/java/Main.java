@@ -1,7 +1,4 @@
-import service.MenuAdmin;
-import view.InterfaceLogin;
 import view.admin.InterfaceAdmin;
-import view.admin.TelaCriarUsuario;
 
 import javax.swing.*;
 
