@@ -1,7 +1,6 @@
 package view.admin;
 
 import service.MenuAdmin;
-import util.LimitText;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,17 +9,21 @@ import java.awt.event.ActionEvent;
 
 public class TelaCriarUsuario extends JFrame {
 
+
     public TelaCriarUsuario() {
         JFrame telaCriarUsuario = new JFrame("Criação de usuários");
 
         JLabel usuarioLabel = new JLabel("Usuário: ");
-        JTextField campoUsuario = new JTextField(10);
+        JTextField campoUsuario = new JTextField(2);
 
         JLabel idadeLabel = new JLabel("Idade: ");
         JTextField campoIdade = new JTextField(10);
 
         JLabel senhaLabel = new JLabel("Senha: ");
         JTextField campoSenha = new JTextField(10);
+
+        JLabel categoriaLabel = new JLabel("Categoria: ");
+        JButton botaoCategoria = new JButton("Escolher categoria");
 
         JButton botaoCadastrarUsuario = new JButton("Cadastrar Usuário");
         JButton botaoDesconectar = new JButton("Desconectar");
@@ -31,8 +34,7 @@ public class TelaCriarUsuario extends JFrame {
 
 
         Container painel = telaCriarUsuario.getContentPane();
-        painel.setLayout(new GridLayout(5,2,5,5));
-        //painel.add(textTitle);
+        painel.setLayout(new GridLayout(6,2,2,10));
 
         painel.add(usuarioLabel);
         painel.add(campoUsuario);
@@ -46,8 +48,18 @@ public class TelaCriarUsuario extends JFrame {
         painel.add(textTipo);
         painel.add(tipoList);
 
+        painel.add(categoriaLabel);
+        painel.add(botaoCategoria);
+
         painel.add(botaoCadastrarUsuario);
         painel.add(botaoDesconectar);
+
+        botaoCategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new JanelaInteresses();
+            }
+        });
 
         // Execução dos botões e lógica de campos
         botaoCadastrarUsuario.addActionListener(new ActionListener() {

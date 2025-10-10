@@ -1,7 +1,5 @@
 package service;
 
-import model.Usuario;
-
 // JFrame é a janela principol
 public class MenuAdmin {
 
