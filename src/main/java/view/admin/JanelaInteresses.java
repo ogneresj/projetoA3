@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JanelaInteresses extends JFrame {
 
@@ -45,14 +46,30 @@ public class JanelaInteresses extends JFrame {
         cbPrivacidade.addItemListener(limitador);
 
         // Botão (Confirmar)
-        List<String> interesses = new ArrayList<String>();
+        Set<String> interesses = new HashSet<>();
         JButton confirmar = new JButton("Confirmar");
         confirmar.addActionListener(e -> {
-            if(cbIA.isSelected()) interesses.add("IA Responsável");
-            if(cbCiberSeguranca.isSelected()) interesses.add("Cibersegurança");
-            if(cbPrivacidade.isSelected()) interesses.add("Privacidade & Ética Digital");
-            dispose();
+
+            if(cbIA.isSelected() && !interesses.contains("IA Responsável")) {
+                interesses.add("IA Responsável");
+            } else if (!cbIA.isSelected()){
+                interesses.remove("IA Responsável");
+            }
+
+            if(cbCiberSeguranca.isSelected() && !interesses.contains("Cibersegurança")){
+                interesses.add("Cibersegurança");
+            } else if (!cbCiberSeguranca.isSelected()){
+                interesses.remove("Cibersegurança");
+            }
+
+            if(cbPrivacidade.isSelected() && !interesses.contains("Privacidade & Ética Digital")) {
+                interesses.add("Privacidade & Ética Digital");
+            } else if (!cbPrivacidade.isSelected()) {
+                interesses.remove("Privacidade & Ética Digital");
+            }
+
             System.out.println(interesses);
+            janelaInteresses.dispose();
         });
 
         // Adicionando componentes
@@ -64,6 +81,7 @@ public class JanelaInteresses extends JFrame {
 
         janelaInteresses.pack();
         janelaInteresses.setLocationRelativeTo(null);
+        janelaInteresses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janelaInteresses.setVisible(true);
     }
 }
