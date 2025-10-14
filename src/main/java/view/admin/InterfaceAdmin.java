@@ -36,8 +36,7 @@ public class InterfaceAdmin extends Menu {
                 menuAdmin.editarUsuario());
 
         botaoDeletarUsuario.addActionListener(e ->
-                menuAdmin.deletarUsuario()
-        );
+                new TelaDeletarUsuario());
 
         // Adicionando componentes na tela de ADMIN
         add(textEdit);

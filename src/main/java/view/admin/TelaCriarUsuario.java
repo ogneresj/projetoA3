@@ -6,9 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TelaCriarUsuario extends JFrame {
 
+    private Set<String> interessesSelecionados = new HashSet<>();
 
     public TelaCriarUsuario() {
         JFrame telaCriarUsuario = new JFrame("Criação de usuários");
@@ -57,7 +60,8 @@ public class TelaCriarUsuario extends JFrame {
         botaoCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new JanelaInteresses();
+                JanelaInteresses janelaInteresses = new JanelaInteresses();
+                interessesSelecionados = janelaInteresses.getInteresses();
             }
         });
 
@@ -80,7 +84,11 @@ public class TelaCriarUsuario extends JFrame {
                     isAdmin = false;
                 }
 
-                menuAdmin.cadastrarUsuarios(usuario, idade , password, isAdmin);
+                menuAdmin.cadastrarUsuarios(usuario, idade , password, isAdmin, interessesSelecionados);
+
+                campoUsuario.setText("");
+                campoSenha.setText("");
+                campoIdade.setText("");
             }
         });
 

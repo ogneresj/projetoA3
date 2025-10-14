@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class JanelaInteresses extends JFrame {
 
+    private Set<String> interesses = new HashSet<>();
+
     public JanelaInteresses() {
         new JCheckBox();
         JFrame janelaInteresses = new JFrame("Interesses");
@@ -23,7 +25,7 @@ public class JanelaInteresses extends JFrame {
         JCheckBox cbPrivacidade = new JCheckBox("Privacidade & Ética Digital");
 
         Container painel = janelaInteresses.getContentPane();
-        painel.setLayout(new GridLayout(5,1,2,2));
+        painel.setLayout(new GridLayout(5, 1, 2, 2));
 
         ItemListener limitador = e -> {
             int contador = 0;
@@ -31,7 +33,7 @@ public class JanelaInteresses extends JFrame {
             if (cbCiberSeguranca.isSelected()) contador++;
             if (cbPrivacidade.isSelected()) contador++;
 
-            if (contador > 2){
+            if (contador > 2) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false);
                 JOptionPane.showMessageDialog(janelaInteresses,
@@ -46,29 +48,27 @@ public class JanelaInteresses extends JFrame {
         cbPrivacidade.addItemListener(limitador);
 
         // Botão (Confirmar)
-        Set<String> interesses = new HashSet<>();
         JButton confirmar = new JButton("Confirmar");
         confirmar.addActionListener(e -> {
 
-            if(cbIA.isSelected() && !interesses.contains("IA Responsável")) {
-                interesses.add("IA Responsável");
-            } else if (!cbIA.isSelected()){
-                interesses.remove("IA Responsável");
+            if (cbIA.isSelected() && !interesses.contains("IA Responsável")) {
+                this.interesses.add("IA Responsável");
+            } else if (!cbIA.isSelected()) {
+                this.interesses.remove("IA Responsável");
             }
 
-            if(cbCiberSeguranca.isSelected() && !interesses.contains("Cibersegurança")){
-                interesses.add("Cibersegurança");
-            } else if (!cbCiberSeguranca.isSelected()){
-                interesses.remove("Cibersegurança");
+            if (cbCiberSeguranca.isSelected() && !interesses.contains("Cibersegurança")) {
+                this.interesses.add("Cibersegurança");
+            } else if (!cbCiberSeguranca.isSelected()) {
+                this.interesses.remove("Cibersegurança");
             }
 
-            if(cbPrivacidade.isSelected() && !interesses.contains("Privacidade & Ética Digital")) {
-                interesses.add("Privacidade & Ética Digital");
+            if (cbPrivacidade.isSelected() && !interesses.contains("Privacidade & Ética Digital")) {
+                this.interesses.add("Privacidade & Ética Digital");
             } else if (!cbPrivacidade.isSelected()) {
-                interesses.remove("Privacidade & Ética Digital");
+                this.interesses.remove("Privacidade & Ética Digital");
             }
 
-            System.out.println(interesses);
             janelaInteresses.dispose();
         });
 
@@ -83,5 +83,9 @@ public class JanelaInteresses extends JFrame {
         janelaInteresses.setLocationRelativeTo(null);
         janelaInteresses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janelaInteresses.setVisible(true);
+    }
+
+    public Set<String> getInteresses() {
+        return interesses;
     }
 }
