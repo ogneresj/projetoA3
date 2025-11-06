@@ -15,13 +15,16 @@ public class ValidarLogin {
         //boolean usuarioComum = (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario"));
 
         if (usuario != null && usuario.equals("admin") &&  password != null && password.equals("admin")) {
-            // Agora com a tela principal com o botão de logout
+           //verifica se o usuário e senha correspondem ao ADMIN
+            JOptionPane.showMessageDialog(null, "Login como administrador realizado com sucesso!");
             new InterfaceAdmin();
         } else if (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario")) {
-            // Chama o construtor novamente para tentar fazer login de novo
+            //verifica se o usuário e senha correspondem ao USUÁRIO COMUM
+            JOptionPane.showMessageDialog(null, "Login como usuário realizado com sucesso!");
             new InterfaceUsuario();
         } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou password inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            // Caso nenhuma validação seja verdadeira mostra uma mensagem de erro informando que o login falhou
+             JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
