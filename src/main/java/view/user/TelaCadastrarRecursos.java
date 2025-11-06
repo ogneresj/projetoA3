@@ -45,7 +45,7 @@ public class TelaCadastrarRecursos extends JFrame {
 
         JButton botaoCadastrarRecurso = new JButton("Cadastrar Recursos");
         JButton botaoDesconectar = new JButton("Desconectar");
-
+        JButton botaoVerRecursos = new JButton("Ver Recursos");
 
         // Titulo
         gbc.gridx = 0; gbc.gridy = 0;
@@ -119,6 +119,10 @@ public class TelaCadastrarRecursos extends JFrame {
                 dispose();
                 JOptionPane.showMessageDialog(null, "Você foi desconectado");
         });
+
+        // Botão para ver os recursos do User
+        botoes.add(botaoVerRecursos);
+        botaoVerRecursos.addActionListener(e -> new TelaListarRecursos());
 
         pack();
         setVisible(true);

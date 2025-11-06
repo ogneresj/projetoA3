@@ -1,16 +1,13 @@
 package service;
 
+import model.Recurso;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuUsuario {
 
-    private List<Recurso> recursos = new ArrayList<>();
-
-    public void cadastrarRecurso() {
-        System.out.println("Cadastrando recurso (modo teste)");
-    }
+    private static final List<Recurso> recursos = new ArrayList<>();
 
     public void cadastrarRecurso(String titulo, String autor, String categoria, String url, String anotacoes) {
         Recurso recurso = new Recurso(titulo, autor, categoria, url, anotacoes);
@@ -24,7 +21,23 @@ public class MenuUsuario {
         System.out.println("Anotações: " + anotacoes);
     }
 
-    public void listarRecursos() {
+    public List<Recurso> listarRecursos() {
+        return recursos;
+    }
+
+    public void removerRecurso(Recurso r) {
+        recursos.remove(r);
+    }
+
+    public void atualizarRecurso(Recurso r, String titulo, String autor, String categoria, String url, String anotacoes) {
+        r.setTitulo(titulo);
+        r.setAutor(autor);
+        r.setCategoria(categoria);
+        r.setUrl(url);
+        r.setAnotacoes(anotacoes);
+    }
+
+    public void mostrarRecursosNaTela() {
         if (recursos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum recurso cadastrado ainda.");
             return;
@@ -40,37 +53,6 @@ public class MenuUsuario {
         }
 
         JOptionPane.showMessageDialog(null, lista.toString());
-    }
-
-    public static class Recurso {
-        private String titulo;
-        private String autor;
-        private String categoria;
-        private String url;
-        private String anotacoes;
-
-        public Recurso(String titulo, String autor, String categoria, String url, String anotacoes) {
-            this.titulo = titulo;
-            this.autor = autor;
-            this.categoria = categoria;
-            this.url = url;
-            this.anotacoes = anotacoes;
-        }
-
-        public String getTitulo() {
-            return titulo; }
-
-        public String getAutor() {
-            return autor; }
-
-        public String getCategoria() {
-            return categoria; }
-
-        public String getUrl() {
-            return url; }
-
-        public String getAnotacoes() {
-            return anotacoes; }
     }
 
     // Visualização dos recursos em ordem alfabética
