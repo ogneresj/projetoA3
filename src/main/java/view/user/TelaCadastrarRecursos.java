@@ -122,7 +122,7 @@ public class TelaCadastrarRecursos extends JFrame {
 
         // Botão para ver os recursos do User
         botoes.add(botaoVerRecursos);
-        botaoVerRecursos.addActionListener(e -> new TelaListarRecursos());
+        botaoVerRecursos.addActionListener(e -> new view.user.TelaListarRecursos());
 
         pack();
         setVisible(true);

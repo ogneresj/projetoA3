@@ -4,16 +4,27 @@ import java.util.Set;
 
 public class Usuario {
 
+    private int id;
     private String nome;
     private int idade;
     private boolean admin;
-    private Set<String> interesses;
+    private String senha;
 
-    public Usuario(String nome, int idade, boolean admin, Set<String> interesses) {
+    public Usuario(String nome, int idade, boolean admin, String senha) {
         this.nome = nome;
         this.idade = idade;
         this.admin = admin;
-        this.interesses = interesses;
+        this.senha = senha;
+    }
+
+    public Usuario() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -32,6 +43,14 @@ public class Usuario {
         this.idade = idade;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public boolean isAdmin() {
         return admin;
     }
@@ -40,17 +59,13 @@ public class Usuario {
         this.admin = admin;
     }
 
-    public Set<String> getInteresses() {
-        return interesses;
-    }
-
     @Override
     public String toString() {
         return "Usuario{" +
-                "nome='" + nome + '\'' +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", idade=" + idade +
                 ", admin=" + admin +
-                ", interesses=" + interesses +
                 '}';
     }
 }

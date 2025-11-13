@@ -5,6 +5,8 @@ import util.Menu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class InterfaceAdmin extends Menu {
 
@@ -35,8 +37,13 @@ public class InterfaceAdmin extends Menu {
         botaoEditarUsuario.addActionListener(e ->
                 menuAdmin.editarUsuario());
 
-        botaoDeletarUsuario.addActionListener(e ->
-                new TelaDeletarUsuario());
+        botaoDeletarUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = Integer.parseInt(JOptionPane.showInputDialog("ID do usuário que deseja deletar: "));
+                menuAdmin.deletarUsuario(id);
+            }
+        });
 
         // Adicionando componentes na tela de ADMIN
         add(textEdit);

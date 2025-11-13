@@ -1,5 +1,6 @@
 package view.admin;
 
+import model.Usuario;
 import service.MenuAdmin;
 
 import javax.swing.*;
@@ -84,7 +85,8 @@ public class TelaCriarUsuario extends JFrame {
                     isAdmin = false;
                 }
 
-                menuAdmin.cadastrarUsuarios(usuario, idade , password, isAdmin, interessesSelecionados);
+                Usuario usuario_create = new Usuario(usuario, idade, isAdmin, password);
+                menuAdmin.cadastrarUsuarios(usuario_create);
 
                 campoUsuario.setText("");
                 campoSenha.setText("");
