@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class Usuario {
@@ -9,12 +11,14 @@ public class Usuario {
     private int idade;
     private boolean admin;
     private String senha;
+    private List<String> interesses;
 
     public Usuario(String nome, int idade, boolean admin, String senha) {
         this.nome = nome;
         this.idade = idade;
         this.admin = admin;
         this.senha = senha;
+        this.interesses = new ArrayList<>();
     }
 
     public Usuario() {}
@@ -57,6 +61,14 @@ public class Usuario {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public List<String> getInteresses() {
+        return interesses;
+    }
+
+    public void setInteresses(List<String> interesses) {
+        this.interesses = interesses;
     }
 
     @Override

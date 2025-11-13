@@ -2,6 +2,7 @@ package service;
 
 import database.Conexao;
 import model.Usuario;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -12,7 +13,18 @@ import java.sql.SQLException;
 public class MenuAdmin {
 
     public void cadastrarUsuarios(Usuario usuario) {
-        String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password) values (?, ?, ?, ?)";
+
+        String senhaOriginal = usuario.getSenha();
+        String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
+
+        String interesseString;
+        if (usuario.getInteresses() != null && !usuario.getInteresses().isEmpty()){
+            interesseString = String.join(", ", usuario.getInteresses());
+        } else {
+            interesseString = "";
+        }
+
+        String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password, interesses) values (?, ?, ?, ?, ?)";
 
         Conexao conexao = new Conexao();
 
@@ -22,11 +34,16 @@ public class MenuAdmin {
             ps.setString(1, usuario.getNome());
             ps.setInt(2, usuario.getIdade());
             ps.setBoolean(3, usuario.isAdmin());
-            ps.setString(4, usuario.getSenha());
+            ps.setString(4, senhaHash);
+
+            ps.setString(5, interesseString);
             ps.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+
         } catch (SQLException e) {
-            System.out.println("Erro ao inserir: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

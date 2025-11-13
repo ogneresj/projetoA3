@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,13 +59,11 @@ public class TelaCriarUsuario extends JFrame {
         painel.add(botaoCadastrarUsuario);
         painel.add(botaoDesconectar);
 
-        botaoCategoria.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JanelaInteresses janelaInteresses = new JanelaInteresses();
-                interessesSelecionados = janelaInteresses.getInteresses();
-            }
-        });
+        botaoCategoria.addActionListener(e -> {
+            JanelaInteresses janelaInteresses = new JanelaInteresses(this);
+            interessesSelecionados = janelaInteresses.getInteresses();
+                }
+        );
 
         // Execução dos botões e lógica de campos
         botaoCadastrarUsuario.addActionListener(new ActionListener() {
@@ -86,6 +85,7 @@ public class TelaCriarUsuario extends JFrame {
                 }
 
                 Usuario usuario_create = new Usuario(usuario, idade, isAdmin, password);
+                usuario_create.setInteresses(new ArrayList<>(interessesSelecionados));
                 menuAdmin.cadastrarUsuarios(usuario_create);
 
                 campoUsuario.setText("");

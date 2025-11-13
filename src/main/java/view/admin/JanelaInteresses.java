@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class JanelaInteresses extends JFrame {
+public class JanelaInteresses extends JDialog {
 
     private Set<String> interesses = new HashSet<>();
 
-    public JanelaInteresses() {
+    public JanelaInteresses(JFrame parentFrame) {
+        super(parentFrame, "Interesses", true);
         new JCheckBox();
-        JFrame janelaInteresses = new JFrame("Interesses");
 
         JLabel escolhaLabel = new JLabel("Escolhas os interesses do Usuário: ");
         escolhaLabel.setFont(new Font("Arial", Font.BOLD, 14));
@@ -24,7 +24,7 @@ public class JanelaInteresses extends JFrame {
         JCheckBox cbCiberSeguranca = new JCheckBox("Cibersegurança");
         JCheckBox cbPrivacidade = new JCheckBox("Privacidade & Ética Digital");
 
-        Container painel = janelaInteresses.getContentPane();
+        Container painel = this.getContentPane();
         painel.setLayout(new GridLayout(5, 1, 2, 2));
 
         ItemListener limitador = e -> {
@@ -36,7 +36,7 @@ public class JanelaInteresses extends JFrame {
             if (contador > 2) {
                 JCheckBox fonte = (JCheckBox) e.getItem();
                 fonte.setSelected(false);
-                JOptionPane.showMessageDialog(janelaInteresses,
+                JOptionPane.showMessageDialog(this,
                         "Você só pode escolher 2 interesses",
                         "Limite de escolhas",
                         JOptionPane.WARNING_MESSAGE);
@@ -50,6 +50,8 @@ public class JanelaInteresses extends JFrame {
         // Botão (Confirmar)
         JButton confirmar = new JButton("Confirmar");
         confirmar.addActionListener(e -> {
+
+            interesses.clear();
 
             if (cbIA.isSelected() && !interesses.contains("IA Responsável")) {
                 this.interesses.add("IA Responsável");
@@ -69,7 +71,7 @@ public class JanelaInteresses extends JFrame {
                 this.interesses.remove("Privacidade & Ética Digital");
             }
 
-            janelaInteresses.dispose();
+            this.dispose();
         });
 
         // Adicionando componentes
@@ -79,10 +81,10 @@ public class JanelaInteresses extends JFrame {
         painel.add(cbPrivacidade);
         painel.add(confirmar);
 
-        janelaInteresses.pack();
-        janelaInteresses.setLocationRelativeTo(null);
-        janelaInteresses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janelaInteresses.setVisible(true);
+        this.pack();
+        this.setLocationRelativeTo(parentFrame);
+        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
 
     public Set<String> getInteresses() {
