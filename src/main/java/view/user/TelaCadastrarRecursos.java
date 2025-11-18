@@ -1,5 +1,6 @@
 package view.user;
 
+import model.Recurso;
 import service.MenuUsuario;
 
 import javax.swing.*;
@@ -102,10 +103,10 @@ public class TelaCadastrarRecursos extends JFrame {
                     return;
                 }
 
-                MenuUsuario menuUsuario = new MenuUsuario();
-                menuUsuario.cadastrarRecurso(titulo, autor, categoriaSelecionada, url, anotacoes);
+                Recurso recurso = new Recurso(titulo, autor, categoriaSelecionada, url, anotacoes);
 
-                JOptionPane.showMessageDialog (null,"Recurso cadastrado com sucesso!");
+                MenuUsuario menuUsuario = new MenuUsuario();
+                menuUsuario.cadastrarRecurso(recurso);
 
                 campoTitulo.setText("");
                 campoAutor.setText("");

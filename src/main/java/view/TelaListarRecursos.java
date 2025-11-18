@@ -39,7 +39,7 @@ public class TelaListarRecursos extends JFrame {
         add(botoes, BorderLayout.SOUTH);
 
         btnAtualizar.addActionListener((ActionEvent e) -> atualizarLista());
-        btnExcluir.addActionListener((ActionEvent e) -> excluirSelecionado());
+        // btnExcluir.addActionListener((ActionEvent e) -> excluirSelecionado());
         btnEditar.addActionListener((ActionEvent e) -> editarSelecionado());
 
         atualizarLista();
@@ -52,15 +52,15 @@ public class TelaListarRecursos extends JFrame {
         for (Recurso r : recursos) listModel.addElement(r);
     }
 
-    private void excluirSelecionado() {
-        Recurso selecionado = listaRecursos.getSelectedValue();
-        if (selecionado == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um recurso para excluir.");
-            return;
-        }
-        menuUsuario.removerRecurso(selecionado);
-        atualizarLista();
-    }
+//    private void excluirSelecionado() {
+//        Recurso selecionado = listaRecursos.getSelectedValue();
+//        if (selecionado == null) {
+//            JOptionPane.showMessageDialog(this, "Selecione um recurso para excluir.");
+//            return;
+//        }
+//        menuUsuario.removerRecurso(selecionado);
+//        atualizarLista();
+//    }
 
     private void editarSelecionado() {
         Recurso selecionado = listaRecursos.getSelectedValue();

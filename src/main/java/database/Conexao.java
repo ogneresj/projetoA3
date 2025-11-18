@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 
 public class Conexao {
     String url = "jdbc:mysql://localhost:3306/db_projeto?useSSL=false&serverTimezone=America/Sao_Paulo";
-    String user = "admin";
-    String password = "@USJT130903";
+    String user = "root";
+    String password = "anima123";
 
     public Connection obtemConexao () {
         try {

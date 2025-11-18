@@ -10,10 +10,6 @@ public class ValidarLogin {
 
     public void validar(String usuario, String password) {
 
-        // Variáveis para teste
-        //boolean admin = (usuario != null && usuario.equals("admin") &&  password != null && password.equals("admin"));
-        //boolean usuarioComum = (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario"));
-
         if (usuario != null && usuario.equals("admin") &&  password != null && password.equals("admin")) {
            //verifica se o usuário e senha correspondem ao ADMIN
             JOptionPane.showMessageDialog(null, "Login como administrador realizado com sucesso!");

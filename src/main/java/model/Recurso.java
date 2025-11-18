@@ -1,6 +1,7 @@
 package model;
 
 public class Recurso {
+    private String id;
     private String titulo;
     private String autor;
     private String categoria;
@@ -13,6 +14,13 @@ public class Recurso {
         this.categoria = categoria;
         this.url = url;
         this.anotacoes = anotacoes;
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitulo() { return titulo; }

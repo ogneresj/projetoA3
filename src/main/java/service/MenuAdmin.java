@@ -24,7 +24,7 @@ public class MenuAdmin {
             interesseString = "";
         }
 
-        String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password, interesses) values (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_usuario (nome, idade, tipo_usuario, senha, interesses) values (?, ?, ?, ?, ?)";
 
         Conexao conexao = new Conexao();
 
@@ -52,7 +52,7 @@ public class MenuAdmin {
     }
 
     public void deletarUsuario(int id) {
-        String sql = "DELETE FROM tb_usuarios WHERE id = ?";
+        String sql = "DELETE FROM tb_usuario WHERE id = ?";
         Conexao conexao = new Conexao();
 
         try(Connection c = conexao.obtemConexao();
