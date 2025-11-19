@@ -34,8 +34,13 @@ public class InterfaceAdmin extends Menu {
         botaoCadastrar.addActionListener(e ->
                 new TelaCriarUsuario());
 
-        botaoEditarUsuario.addActionListener(e ->
-                menuAdmin.editarUsuario());
+        botaoEditarUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = Integer.parseInt(JOptionPane.showInputDialog("Qual ID do usuário que deseja atualizar: "));
+                new TelaAtualizarUsuario(id);
+            }
+        });
 
         botaoDeletarUsuario.addActionListener(new ActionListener() {
             @Override

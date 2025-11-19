@@ -25,10 +25,10 @@ public class TelaCadastrarRecursos extends JFrame {
         gbc.insets = new Insets(5, 5, 5, 5); // espaçamento entre os componentes
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel tituloLabel = new JLabel("Título: ");
+        JLabel tituloLabel = new JLabel("Título:* ");
         JTextField campoTitulo = new JTextField(20);
 
-        JLabel autorLabel = new JLabel("Autor: ");
+        JLabel autorLabel = new JLabel("Autor:* ");
         JTextField campoAutor = new JTextField(20);
 
         JLabel categoriaLabel = new JLabel("Categoria: ");
@@ -38,7 +38,7 @@ public class TelaCadastrarRecursos extends JFrame {
         JLabel urlLabel = new JLabel ("URL (OPCIONAL): ");
         JTextField campoURL = new JTextField (20);
 
-        JLabel anotacoesLabel = new JLabel ("Anotações: ");
+        JLabel anotacoesLabel = new JLabel ("Anotações:* ");
         JTextArea campoAnotacoes = new JTextArea (5,20);
         campoAnotacoes.setLineWrap(true);
         campoAnotacoes.setWrapStyleWord(true);
@@ -123,7 +123,8 @@ public class TelaCadastrarRecursos extends JFrame {
 
         // Botão para ver os recursos do User
         botoes.add(botaoVerRecursos);
-        botaoVerRecursos.addActionListener(e -> new view.user.TelaListarRecursos());
+        botaoVerRecursos.addActionListener(e ->
+                new TelaListarRecursos());
 
         pack();
         setVisible(true);

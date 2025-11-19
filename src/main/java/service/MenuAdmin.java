@@ -24,12 +24,12 @@ public class MenuAdmin {
             interesseString = "";
         }
 
-        String sql = "INSERT INTO tb_usuario (nome, idade, tipo_usuario, senha, interesses) values (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password, interesses) values (?, ?, ?, ?, ?)";
 
         Conexao conexao = new Conexao();
 
-        try(Connection c = conexao.obtemConexao();
-            PreparedStatement ps = c.prepareStatement(sql)) {
+        try(Connection conn = conexao.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, usuario.getNome());
             ps.setInt(2, usuario.getIdade());
@@ -37,7 +37,7 @@ public class MenuAdmin {
             ps.setString(4, senhaHash);
 
             ps.setString(5, interesseString);
-            ps.executeUpdate();
+            ps.execute();
 
             JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
 
@@ -47,12 +47,42 @@ public class MenuAdmin {
         }
     }
 
-    public void editarUsuario() {
-        System.out.println("Editando Usuário");
+    public void atualizarUsuario(int id, Usuario usuario) {
+
+        String interesseString;
+        if (usuario.getInteresses() != null && !usuario.getInteresses().isEmpty()){
+            interesseString = String.join(", ", usuario.getInteresses());
+        } else {
+            interesseString = "";
+        }
+
+        String sql = "UPDATE tb_usuarios SET nome = ?, idade = ?, tipoUsuario = ?, password = ?, interesses = ? WHERE id = ?";
+
+        Conexao conexao = new Conexao();
+        try (Connection conn = conexao.obtemConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            String senhaOriginal = usuario.getSenha();
+            String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
+
+            ps.setString(1, usuario.getNome());
+            ps.setInt(2, usuario.getIdade());
+            ps.setBoolean(3, usuario.isAdmin());
+            ps.setString(4, senhaHash);
+
+            ps.setString(5, interesseString);
+            ps.setInt(6, id);
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deletarUsuario(int id) {
-        String sql = "DELETE FROM tb_usuario WHERE id = ?";
+        String sql = "DELETE FROM tb_usuarios WHERE id = ?";
         Conexao conexao = new Conexao();
 
         try(Connection c = conexao.obtemConexao();

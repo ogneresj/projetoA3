@@ -5,18 +5,18 @@ import service.MenuAdmin;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TelaCriarUsuario extends JFrame {
+public class TelaAtualizarUsuario extends JFrame {
 
     private Set<String> interessesSelecionados = new HashSet<>();
 
-    public TelaCriarUsuario() {
-        JFrame telaCriarUsuario = new JFrame("Criação de usuários");
+    public TelaAtualizarUsuario(int id) {
+        JFrame telaAtualizarUsuario = new JFrame("Atualizar Usuário");
 
         JLabel usuarioLabel = new JLabel("Usuário: ");
         JTextField campoUsuario = new JTextField(2);
@@ -30,7 +30,7 @@ public class TelaCriarUsuario extends JFrame {
         JLabel categoriaLabel = new JLabel("Categoria: ");
         JButton botaoCategoria = new JButton("Escolher categoria");
 
-        JButton botaoCadastrarUsuario = new JButton("Cadastrar Usuário");
+        JButton botaoAtualizarUsuario = new JButton("Atualizar Usuário");
         JButton botaoCancelar = new JButton("Cancelar");
 
         JLabel textTipo = new JLabel("Tipo de Usuário");
@@ -38,7 +38,7 @@ public class TelaCriarUsuario extends JFrame {
         JComboBox<String> tipoList = new JComboBox<>(tipo);
 
 
-        Container painel = telaCriarUsuario.getContentPane();
+        Container painel = telaAtualizarUsuario.getContentPane();
         painel.setLayout(new GridLayout(6,2,2,10));
 
         painel.add(usuarioLabel);
@@ -56,17 +56,17 @@ public class TelaCriarUsuario extends JFrame {
         painel.add(categoriaLabel);
         painel.add(botaoCategoria);
 
-        painel.add(botaoCadastrarUsuario);
+        painel.add(botaoAtualizarUsuario);
         painel.add(botaoCancelar);
 
         botaoCategoria.addActionListener(e -> {
-            JanelaInteresses janelaInteresses = new JanelaInteresses(this);
-            interessesSelecionados = janelaInteresses.getInteresses();
+                    JanelaInteresses janelaInteresses = new JanelaInteresses(this);
+                    interessesSelecionados = janelaInteresses.getInteresses();
                 }
         );
 
         // Execução dos botões e lógica de campos
-        botaoCadastrarUsuario.addActionListener(new ActionListener() {
+        botaoAtualizarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MenuAdmin menuAdmin = new MenuAdmin();
@@ -84,9 +84,9 @@ public class TelaCriarUsuario extends JFrame {
                     isAdmin = false;
                 }
 
-                Usuario usuario_create = new Usuario(usuario, idade, isAdmin, password);
-                usuario_create.setInteresses(new ArrayList<>(interessesSelecionados));
-                menuAdmin.cadastrarUsuarios(usuario_create);
+                Usuario usuario_updated = new Usuario(usuario, idade, isAdmin, password);
+                usuario_updated.setInteresses(new ArrayList<>(interessesSelecionados));
+                menuAdmin.atualizarUsuario(id, usuario_updated);
 
                 campoUsuario.setText("");
                 campoSenha.setText("");
@@ -97,14 +97,14 @@ public class TelaCriarUsuario extends JFrame {
         botaoCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                telaCriarUsuario.dispose();
+                telaAtualizarUsuario.dispose();
                 JOptionPane.showMessageDialog(null, "Você foi desconectado");
             }
         });
 
-        telaCriarUsuario.pack();
-        telaCriarUsuario.setLocationRelativeTo(null);
-        telaCriarUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        telaCriarUsuario.setVisible(true);
+        telaAtualizarUsuario.pack();
+        telaAtualizarUsuario.setLocationRelativeTo(null);
+        telaAtualizarUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        telaAtualizarUsuario.setVisible(true);
     }
 }

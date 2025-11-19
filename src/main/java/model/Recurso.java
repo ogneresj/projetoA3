@@ -16,6 +16,8 @@ public class Recurso {
         this.anotacoes = anotacoes;
     }
 
+    public Recurso() {};
+
     public String getId() {
         return id;
     }

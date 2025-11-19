@@ -1,14 +1,12 @@
 package view.user;
 import service.MenuUsuario;
 import util.Menu;
-import java.awt.FlowLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class InterfaceUsuario extends Menu {
@@ -22,7 +20,7 @@ public class InterfaceUsuario extends Menu {
         JButton botaoCadastrarRecurso = new JButton("Cadastrar Recurso");
         botaoCadastrarRecurso.setBounds(90,70,180,20);
 
-        JButton botaoDeletarRecurso = new JButton("Deletar Recuros");
+        JButton botaoDeletarRecurso = new JButton("Deletar Recursos");
         botaoDeletarRecurso.setBounds(90,100,180,20);
 
         botaoCadastrarRecurso.addActionListener(e ->

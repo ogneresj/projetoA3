@@ -6,6 +6,7 @@ import service.MenuUsuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class TelaListarRecursos extends JFrame {
@@ -40,7 +41,14 @@ public class TelaListarRecursos extends JFrame {
 
         btnAtualizar.addActionListener((ActionEvent e) -> atualizarLista());
         // btnExcluir.addActionListener((ActionEvent e) -> excluirSelecionado());
-        btnEditar.addActionListener((ActionEvent e) -> editarSelecionado());
+        btnEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = Integer.parseInt(JOptionPane.showInputDialog("Qual ID do recurso que deseja atualizar: "));
+                editarSelecionado(id);
+            }
+
+        });
 
         atualizarLista();
         setVisible(true);
@@ -62,7 +70,7 @@ public class TelaListarRecursos extends JFrame {
 //        atualizarLista();
 //    }
 
-    private void editarSelecionado() {
+    public void editarSelecionado(int id) {
         Recurso selecionado = listaRecursos.getSelectedValue();
         if (selecionado == null) {
             JOptionPane.showMessageDialog(this, "Selecione um recurso para editar.");
@@ -75,7 +83,9 @@ public class TelaListarRecursos extends JFrame {
         String novaUrl = JOptionPane.showInputDialog("Nova URL:", selecionado.getUrl());
         String novasAnotacoes = JOptionPane.showInputDialog("Novas anotações:", selecionado.getAnotacoes());
 
-        menuUsuario.atualizarRecurso(selecionado, novoTitulo, novoAutor, novaCategoria, novaUrl, novasAnotacoes);
+        Recurso recurso = new Recurso(novoTitulo, novoAutor, novaCategoria, novaUrl, novasAnotacoes);
+
+        menuUsuario.atualizarRecurso(id, recurso);
         atualizarLista();
     }
 }
