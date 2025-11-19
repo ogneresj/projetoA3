@@ -15,13 +15,6 @@ public class MenuUsuario {
 
     public void cadastrarRecurso(Recurso recurso) {
 
-        // System.out.println("Recurso cadastrado com sucesso!");
-        // System.out.println("Título: " + recurso.getTitulo());
-        // System.out.println("Autor: " + recurso.getAutor());
-        // System.out.println("Categoria: " + recurso.getCategoria());
-        // System.out.println("URL: " + recurso.getUrl());
-        // System.out.println("Anotações: " + recurso.getAnotacoes());
-
         String sql = "INSERT INTO tb_recursos (titulo, autor, categoria, url, anotacoes) values (?, ?, ?, ?, ?)";
 
         Conexao conexao = new Conexao();
@@ -39,12 +32,37 @@ public class MenuUsuario {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+         }
     }
 
     public List<Recurso> listarRecursos() {
         return recursos;
     }
+
+    // Método com ordenação por categoria > anotações
+    public List<Recurso> listarRecursos() {
+        List<Recurso> lista = new ArrayList<>();
+
+        String sql = "SELECT id, titulo, autor, categoria, url, anotacoes FROM tb_recursos";
+
+        Conexao conexao = new Conexao();
+
+        try (Connection c = conexao.obtemConexao();
+             PreparedStatement ps = c.prepareStatement(sql);
+             var rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Recurso r = new Recurso(
+                        rs.getInt("id"),
+                        rs.getString("titulo"),
+                        rs.getString("autor"),
+                        rs.getString("categoria"),
+                        rs.getString("url"),
+                        rs.getString("anotacoes")
+                );
+                lista.add(r);
+            }
+
 
     public void removerRecurso(int id) {
         String sql = "DELETE FROM tb_recursos WHERE id = ?";
@@ -67,6 +85,14 @@ public class MenuUsuario {
         }
     }
 
+       // Ordem composta = Categoria, depois Anotações
+            lista.sort(
+                    Comparator.comparing(Recurso::getCategoria)
+                            .thenComparing(Recurso::getAnotacoes)
+            );
+
+            return lista;
+
     public void atualizarRecurso(Recurso r, String titulo, String autor, String categoria, String url, String anotacoes) {
         r.setTitulo(titulo);
         r.setAutor(autor);
@@ -75,44 +101,26 @@ public class MenuUsuario {
         r.setAnotacoes(anotacoes);
     }
 
+    // puxar ordenando dá SQL
     public void mostrarRecursosNaTela() {
-        if (recursos.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum recurso cadastrado ainda.");
-            return;
-        }
+                List<Recurso> lista = listarRecursos();
 
-        StringBuilder lista = new StringBuilder("Recursos cadastrados:\n\n");
-        for (Recurso r : recursos) {
-            lista.append("Título: ").append(r.getTitulo()).append("\n");
-            lista.append("Autor: ").append(r.getAutor()).append("\n");
-            lista.append("Categoria: ").append(r.getCategoria()).append("\n");
-            lista.append("URL: ").append(r.getUrl()).append("\n");
-            lista.append("Anotações: ").append(r.getAnotacoes()).append("\n\n");
-        }
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Nenhum recurso cadastrado ainda.");
+                    return;
+                }
 
-        JOptionPane.showMessageDialog(null, lista.toString());
+                StringBuilder lista = new StringBuilder("Recursos cadastrados (ordenados):\n\n");
+
+                for (Recurso r : lista) {
+                    sb.append("ID: ").append(r.getId()).append("\n");
+                    sb.append("Título: ").append(r.getTitulo()).append("\n");
+                    sb.append("Autor: ").append(r.getAutor()).append("\n");
+                    sb.append("Categoria: ").append(r.getCategoria()).append("\n");
+                    sb.append("URL: ").append(r.getUrl()).append("\n");
+                    sb.append("Anotações: ").append(r.getAnotacoes()).append("\n\n");
+                }
+
+                JOptionPane.showMessageDialog(null, lista.toString());
     }
-
-    // Visualização dos recursos em ordem alfabética
-    // private void visualizarRecursos() {
-        // if (listaRecursos.isEmpty()) {
-            // JOptionPane.showMessageDialog(null, "Nenhum recurso cadastrado.");
-            // return;
-        // }
-// 
-        // Collections.sort(listaRecursos, Comparator.comparing(Recurso::getTitulo));
-// 
-        // StringBuilder sb = new StringBuilder("Lista de Recursos:\n\n");
-        // for (Recurso r : listaRecursos) {
-            // sb.append(r.toString()).append("\n");
-        // }
-// 
-        // JOptionPane.showMessageDialog(null, sb.toString(),
-                // "Recursos Cadastrados", JOptionPane.INFORMATION_MESSAGE);
-    // }
-// 
-// 
-    // public void visualizarRecursos() {
-// 
-    // }
 }
