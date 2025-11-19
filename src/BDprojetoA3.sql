@@ -1,3 +1,6 @@
+CREATE DATABASE db_projeto;
+USE db_projeto;
+
 ALTER TABLE tb_usuarios ADD COLUMN interesses VARCHAR(255);
 
 CREATE TABLE tb_usuarios (
