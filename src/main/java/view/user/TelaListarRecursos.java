@@ -12,7 +12,6 @@ import java.util.List;
 
 public class TelaListarRecursos extends JFrame {
 
-    private DefaultListModel<Recurso> listModel;
     private JList<Recurso> listaRecursos;
     MenuUsuario menuUsuario = new MenuUsuario();
 
@@ -23,7 +22,6 @@ public class TelaListarRecursos extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-
 
         List<Recurso> recursos = menuUsuario.listarRecursos();
 
@@ -59,11 +57,5 @@ public class TelaListarRecursos extends JFrame {
 
 
         add(painelBotoes, BorderLayout.SOUTH);
-    }
-
-    private void atualizarLista(){
-        listModel.clear();
-        List<Recurso> recursos = menuUsuario.listarRecursos();
-        for (Recurso r : recursos) listModel.addElement(r);
     }
 }

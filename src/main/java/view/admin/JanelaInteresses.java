@@ -50,7 +50,6 @@ public class JanelaInteresses extends JDialog {
         // Botão (Confirmar)
         JButton confirmar = new JButton("Confirmar");
         confirmar.addActionListener(e -> {
-
             interesses.clear();
 
             if (cbIA.isSelected() && !interesses.contains("IA Responsável")) {

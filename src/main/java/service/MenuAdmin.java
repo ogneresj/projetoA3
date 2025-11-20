@@ -14,36 +14,53 @@ public class MenuAdmin {
 
     public void cadastrarUsuarios(Usuario usuario) {
 
+        Conexao conexao = new Conexao();
         String senhaOriginal = usuario.getSenha();
         String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
 
         String interesseString;
-        if (usuario.getInteresses() != null && !usuario.getInteresses().isEmpty()){
-            interesseString = String.join(", ", usuario.getInteresses());
+        if(!usuario.isAdmin()) {
+            if (usuario.getInteresses() != null && !usuario.getInteresses().isEmpty()) {
+                interesseString = String.join(", ", usuario.getInteresses());
+                String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password, interesses) values (?, ?, ?, ?, ?)";
+                try (Connection conn = conexao.obtemConexao();
+                     PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                    ps.setString(1, usuario.getNome());
+                    ps.setInt(2, usuario.getIdade());
+                    ps.setBoolean(3, usuario.isAdmin());
+                    ps.setString(4, senhaHash);
+
+                    ps.setString(5, interesseString);
+                    ps.execute();
+
+                    JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Você precisa selecionar os interesses: ");
+            }
         } else {
             interesseString = "";
-        }
+            String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password) values (?, ?, ?, ?)";
+            try (Connection conn = conexao.obtemConexao();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        String sql = "INSERT INTO tb_usuarios (nome, idade, tipoUsuario, password, interesses) values (?, ?, ?, ?, ?)";
+                ps.setString(1, usuario.getNome());
+                ps.setInt(2, usuario.getIdade());
+                ps.setBoolean(3, usuario.isAdmin());
+                ps.setString(4, senhaHash);
+                ps.execute();
 
-        Conexao conexao = new Conexao();
+                JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
 
-        try(Connection conn = conexao.obtemConexao();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, usuario.getNome());
-            ps.setInt(2, usuario.getIdade());
-            ps.setBoolean(3, usuario.isAdmin());
-            ps.setString(4, senhaHash);
-
-            ps.setString(5, interesseString);
-            ps.execute();
-
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage());
-            e.printStackTrace();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

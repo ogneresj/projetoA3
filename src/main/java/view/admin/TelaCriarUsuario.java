@@ -60,8 +60,17 @@ public class TelaCriarUsuario extends JFrame {
         painel.add(botaoVoltar);
 
         botaoCategoria.addActionListener(e -> {
-            JanelaInteresses janelaInteresses = new JanelaInteresses(this);
-            interessesSelecionados = janelaInteresses.getInteresses();
+            String selectedItem = (String) tipoList.getSelectedItem();
+            boolean isAdmin = "Admin".equals(selectedItem);
+
+            if(!isAdmin) {
+                JanelaInteresses janelaInteresses = new JanelaInteresses(this);
+                interessesSelecionados = janelaInteresses.getInteresses();
+            } else {
+                JOptionPane.showMessageDialog(null, "Como Administrador, a seleção de interesses não é necessária.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                interessesSelecionados = new HashSet<>();
+            }
+
                 }
         );
 
@@ -86,6 +95,18 @@ public class TelaCriarUsuario extends JFrame {
 
                 Usuario usuario_create = new Usuario(usuario, idade, isAdmin, password);
                 usuario_create.setInteresses(new ArrayList<>(interessesSelecionados));
+
+                if(!isAdmin) {
+                    if (interessesSelecionados != null && !interessesSelecionados.isEmpty()) {
+                        usuario_create.setInteresses(new ArrayList<>(interessesSelecionados));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuário Comum deve selecionar interesses.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } else {
+                    usuario_create.setInteresses(new ArrayList<>());
+                }
+
                 menuAdmin.cadastrarUsuarios(usuario_create);
 
                 campoUsuario.setText("");

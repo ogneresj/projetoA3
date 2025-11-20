@@ -25,3 +25,4 @@ SELECT * FROM tb_usuarios;
 SELECT * FROM tb_recursos;
 
 DROP TABLE tb_usuarios;
+DROP TABLE tb_recursos;
