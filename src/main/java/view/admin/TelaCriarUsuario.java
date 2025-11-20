@@ -31,7 +31,7 @@ public class TelaCriarUsuario extends JFrame {
         JButton botaoCategoria = new JButton("Escolher categoria");
 
         JButton botaoCadastrarUsuario = new JButton("Cadastrar Usuário");
-        JButton botaoCancelar = new JButton("Cancelar");
+        JButton botaoVoltar = new JButton("Voltar");
 
         JLabel textTipo = new JLabel("Tipo de Usuário");
         String[] tipo = {"Admin", "Usuário Comum"};
@@ -57,7 +57,7 @@ public class TelaCriarUsuario extends JFrame {
         painel.add(botaoCategoria);
 
         painel.add(botaoCadastrarUsuario);
-        painel.add(botaoCancelar);
+        painel.add(botaoVoltar);
 
         botaoCategoria.addActionListener(e -> {
             JanelaInteresses janelaInteresses = new JanelaInteresses(this);
@@ -94,17 +94,16 @@ public class TelaCriarUsuario extends JFrame {
             }
         });
 
-        botaoCancelar.addActionListener(new ActionListener() {
+        botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 telaCriarUsuario.dispose();
-                JOptionPane.showMessageDialog(null, "Você foi desconectado");
             }
         });
 
         telaCriarUsuario.pack();
         telaCriarUsuario.setLocationRelativeTo(null);
-        telaCriarUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        telaCriarUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         telaCriarUsuario.setVisible(true);
     }
 }

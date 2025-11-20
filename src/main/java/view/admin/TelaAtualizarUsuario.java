@@ -98,7 +98,6 @@ public class TelaAtualizarUsuario extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 telaAtualizarUsuario.dispose();
-                JOptionPane.showMessageDialog(null, "Você foi desconectado");
             }
         });
 

@@ -2,17 +2,18 @@ package view.user;
 
 import model.Recurso;
 import service.MenuUsuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaCadastrarRecursos extends JFrame {
+public class TelaAtualizarRecurso extends JFrame{
 
-    public TelaCadastrarRecursos () {
+    public TelaAtualizarRecurso(int id) {
 
-        setTitle("Cadastrar Recurso");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Atualizar Recurso");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(450, 400);
         setLocationRelativeTo(null);
 
@@ -41,9 +42,8 @@ public class TelaCadastrarRecursos extends JFrame {
         campoAnotacoes.setWrapStyleWord(true);
         JScrollPane scrollAnotacoes = new JScrollPane (campoAnotacoes);
 
-        JButton botaoCadastrarRecurso = new JButton("Cadastrar Recurso");
-        JButton botaoDesconectar = new JButton("Voltar");
-        JButton botaoVerRecursos = new JButton("Ver Recursos");
+        JButton botaoCadastrarRecurso = new JButton("Atualizar Recurso");
+        JButton botaoDesconectar = new JButton("Desconectar");
 
         // Titulo
         gbc.gridx = 0; gbc.gridy = 0;
@@ -103,7 +103,7 @@ public class TelaCadastrarRecursos extends JFrame {
                 Recurso recurso = new Recurso(titulo, autor, categoriaSelecionada, url, anotacoes);
 
                 MenuUsuario menuUsuario = new MenuUsuario();
-                menuUsuario.cadastrarRecurso(recurso);
+                menuUsuario.atualizarRecurso(id, recurso);
 
                 campoTitulo.setText("");
                 campoAutor.setText("");
@@ -114,14 +114,11 @@ public class TelaCadastrarRecursos extends JFrame {
         });
 
         botaoDesconectar.addActionListener(e -> {
-                dispose();
-                JOptionPane.showMessageDialog(null, "Você foi desconectado");
+            dispose();
+            JOptionPane.showMessageDialog(null, "Você foi desconectado");
         });
 
         pack();
         setVisible(true);
     }
 }
-
-
-

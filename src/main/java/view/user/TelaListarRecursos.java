@@ -7,85 +7,63 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TelaListarRecursos extends JFrame {
 
-    private MenuUsuario menuUsuario;
     private DefaultListModel<Recurso> listModel;
     private JList<Recurso> listaRecursos;
+    MenuUsuario menuUsuario = new MenuUsuario();
 
     public TelaListarRecursos() {
-        menuUsuario = new MenuUsuario();
 
-        setTitle("Meus Recursos");
-        setSize(500, 400);
+        setTitle("Lista de recursos");
+        setSize(1500, 1000);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
-        listModel = new DefaultListModel<>();
-        listaRecursos = new JList<>(listModel);
-        JScrollPane scroll = new JScrollPane(listaRecursos);
 
-        JButton btnAtualizar = new JButton("Atualizar Lista");
-        JButton btnEditar = new JButton("Editar");
-        JButton btnExcluir = new JButton("Excluir");
+        List<Recurso> recursos = menuUsuario.listarRecursos();
 
-        JPanel botoes = new JPanel();
-        botoes.add(btnAtualizar);
-        botoes.add(btnEditar);
-        botoes.add(btnExcluir);
+        String[] colunas = {
+                "ID", "Título", "Autor", "Categoria", "URL", "Anotações"
+        };
+
+        Object[][] dados = new Object[recursos.size()][6];
+
+        for (int i = 0; i < recursos.size(); i++) {
+            Recurso r = recursos.get(i);
+            dados[i][0] = r.getId();
+            dados[i][1] = r.getTitulo();
+            dados[i][2] = r.getAutor();
+            dados[i][3] = r.getCategoria();
+            dados[i][4] = r.getUrl();
+            dados[i][5] = r.getAnotacoes();
+        }
+
+        JTable tabela = new JTable(dados, colunas);
+        JScrollPane scroll = new JScrollPane(tabela);
 
         add(scroll, BorderLayout.CENTER);
-        add(botoes, BorderLayout.SOUTH);
 
-        btnAtualizar.addActionListener((ActionEvent e) -> atualizarLista());
-        // btnExcluir.addActionListener((ActionEvent e) -> excluirSelecionado());
-        btnEditar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int id = Integer.parseInt(JOptionPane.showInputDialog("Qual ID do recurso que deseja atualizar: "));
-                editarSelecionado(id);
-            }
+        JButton botaoVoltar = new JButton("Voltar");
 
-        });
+        botaoVoltar.addActionListener(e ->
+                dispose()
+        );
 
-        atualizarLista();
-        setVisible(true);
+        JPanel painelBotoes = new JPanel();
+        painelBotoes.add(botaoVoltar);
+
+
+        add(painelBotoes, BorderLayout.SOUTH);
     }
 
-    private void atualizarLista() {
+    private void atualizarLista(){
         listModel.clear();
         List<Recurso> recursos = menuUsuario.listarRecursos();
         for (Recurso r : recursos) listModel.addElement(r);
-    }
-
-//    private void excluirSelecionado() {
-//        Recurso selecionado = listaRecursos.getSelectedValue();
-//        if (selecionado == null) {
-//            JOptionPane.showMessageDialog(this, "Selecione um recurso para excluir.");
-//            return;
-//        }
-//        menuUsuario.removerRecurso(selecionado);
-//        atualizarLista();
-//    }
-
-    public void editarSelecionado(int id) {
-        Recurso selecionado = listaRecursos.getSelectedValue();
-        if (selecionado == null) {
-            JOptionPane.showMessageDialog(this, "Selecione um recurso para editar.");
-            return;
-        }
-
-        String novoTitulo = JOptionPane.showInputDialog("Novo título:", selecionado.getTitulo());
-        String novoAutor = JOptionPane.showInputDialog("Novo autor:", selecionado.getAutor());
-        String novaCategoria = JOptionPane.showInputDialog("Nova categoria:", selecionado.getCategoria());
-        String novaUrl = JOptionPane.showInputDialog("Nova URL:", selecionado.getUrl());
-        String novasAnotacoes = JOptionPane.showInputDialog("Novas anotações:", selecionado.getAnotacoes());
-
-        Recurso recurso = new Recurso(novoTitulo, novoAutor, novaCategoria, novaUrl, novasAnotacoes);
-
-        menuUsuario.atualizarRecurso(id, recurso);
-        atualizarLista();
     }
 }
