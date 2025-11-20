@@ -66,35 +66,47 @@ public class MenuAdmin {
 
     public void atualizarUsuario(int id, Usuario usuario) {
 
-        String interesseString;
-        if (usuario.getInteresses() != null && !usuario.getInteresses().isEmpty()){
-            interesseString = String.join(", ", usuario.getInteresses());
-        } else {
-            interesseString = "";
+        Conexao conexao = new Conexao();
+
+        String senhaOriginal = usuario.getSenha();
+        String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
+
+        String interesseString = null;
+
+        if (!usuario.isAdmin()) {
+            if (usuario.getInteresses() != null && !usuario.getInteresses().isEmpty()) {
+                interesseString = String.join(", ", usuario.getInteresses());
+            } else {
+                JOptionPane.showMessageDialog(null, "Você precisa selecionar os interesses.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         String sql = "UPDATE tb_usuarios SET nome = ?, idade = ?, tipoUsuario = ?, password = ?, interesses = ? WHERE id = ?";
 
-        Conexao conexao = new Conexao();
         try (Connection conn = conexao.obtemConexao();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            String senhaOriginal = usuario.getSenha();
-            String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
 
             ps.setString(1, usuario.getNome());
             ps.setInt(2, usuario.getIdade());
             ps.setBoolean(3, usuario.isAdmin());
             ps.setString(4, senhaHash);
 
-            ps.setString(5, interesseString);
+            if (interesseString == null) {
+                ps.setNull(5, java.sql.Types.VARCHAR);
+            } else {
+                ps.setString(5, interesseString);
+            }
+
             ps.setInt(6, id);
             ps.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso!");
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Usuário: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

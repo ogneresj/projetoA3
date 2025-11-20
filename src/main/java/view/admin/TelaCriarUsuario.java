@@ -100,7 +100,7 @@ public class TelaCriarUsuario extends JFrame {
                     if (interessesSelecionados != null && !interessesSelecionados.isEmpty()) {
                         usuario_create.setInteresses(new ArrayList<>(interessesSelecionados));
                     } else {
-                        JOptionPane.showMessageDialog(null, "Usuário Comum deve selecionar interesses.", "Erro", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Usuário Comum deve selecionar interesses.", "Erro", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                 } else {

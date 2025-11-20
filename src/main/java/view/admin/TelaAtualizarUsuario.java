@@ -60,8 +60,17 @@ public class TelaAtualizarUsuario extends JFrame {
         painel.add(botaoCancelar);
 
         botaoCategoria.addActionListener(e -> {
-                    JanelaInteresses janelaInteresses = new JanelaInteresses(this);
-                    interessesSelecionados = janelaInteresses.getInteresses();
+            String selectedItem = (String) tipoList.getSelectedItem();
+            boolean isAdmin = "Admin".equals(selectedItem);
+
+            if(!isAdmin) {
+                JanelaInteresses janelaInteresses = new JanelaInteresses(this);
+                interessesSelecionados = janelaInteresses.getInteresses();
+            } else {
+                JOptionPane.showMessageDialog(null, "Como Administrador, a seleção de interesses não é necessária.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                interessesSelecionados.remove(interessesSelecionados);
+                interessesSelecionados = new HashSet<>();
+            }
                 }
         );
 
@@ -85,7 +94,20 @@ public class TelaAtualizarUsuario extends JFrame {
                 }
 
                 Usuario usuario_updated = new Usuario(usuario, idade, isAdmin, password);
-                usuario_updated.setInteresses(new ArrayList<>(interessesSelecionados));
+
+                if(!isAdmin){
+                    if(interessesSelecionados != null && !interessesSelecionados.isEmpty()) {
+                        usuario_updated.setInteresses(new ArrayList<>(interessesSelecionados));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuário Comum deve selecionar interesses.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } else {
+                    interessesSelecionados.clear();
+
+                    usuario_updated.setInteresses(new ArrayList<>(interessesSelecionados));
+                }
+
                 menuAdmin.atualizarUsuario(id, usuario_updated);
 
                 campoUsuario.setText("");
