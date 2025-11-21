@@ -13,21 +13,19 @@ import java.sql.SQLException;
 
 public class ValidarLogin {
 
-//    public void validar(String usuario, String password) {
-//
-//        if (usuario != null && usuario.equals("admin") &&  password != null && password.equals("admin")) {
-//           //verifica se o usuário e senha correspondem ao ADMIN
-//            new InterfaceAdmin();
-//        } else if (usuario != null && usuario.equals("usuario") && password != null && password.equals("usuario")) {
-//            //verifica se o usuário e senha correspondem ao USUÁRIO COMUM
-//            new InterfaceUsuario();
-//        } else {
-//            // Caso nenhuma validação seja verdadeira mostra uma mensagem de erro informando que o login falhou
-//             JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
+    public void realizarLogin(String nomeUsuario, String senha) {
+        String tipoUsuarioLogado = verificandoLogin(nomeUsuario, senha);
 
-
+        if (tipoUsuarioLogado == null) {
+            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!");
+        } else if (tipoUsuarioLogado.equals("true")) {
+            JOptionPane.showMessageDialog(null, "Login de Administrador bem-sucedido!");
+            new InterfaceAdmin();
+        } else if (tipoUsuarioLogado.equals("false")) {
+            JOptionPane.showMessageDialog(null, "Login de Usuário bem-sucedido!");
+            new InterfaceUsuario();
+        }
+    }
 
     public String[] buscarSenha(String nomeUsuario) {
         String sql = "SELECT password, tipoUsuario FROM tb_usuarios WHERE nome = ?";
@@ -54,17 +52,22 @@ public class ValidarLogin {
     }
 
 
-    public boolean verificandoLogin(String nomeUsuario, String senhaDigitada) {
+    public String verificandoLogin(String nomeUsuario, String senhaDigitada) {
 
         String[] credenciais = buscarSenha(nomeUsuario);
         if (credenciais == null) {
-            return false;
+            return null;
         }
 
         String senhaHashBanco = credenciais[0];
+        String tipoUsuario = credenciais[1];
 
-        return BCrypt.checkpw(senhaDigitada, senhaHashBanco);
+        if (BCrypt.checkpw(senhaDigitada, senhaHashBanco)) {
+            return tipoUsuario;
+        } else {
+            return null;
 
     }
+}
 }
 

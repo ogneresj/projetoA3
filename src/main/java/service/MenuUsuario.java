@@ -13,11 +13,11 @@ import java.util.List;
 
 public class MenuUsuario {
 
+    Conexao conexao = new Conexao();
+
     public void cadastrarRecurso(Recurso recurso) {
 
         String sql = "INSERT INTO tb_recursos (titulo, autor, categoria, url, anotacoes) values (?, ?, ?, ?, ?)";
-
-        Conexao conexao = new Conexao();
 
         try(Connection c = conexao.obtemConexao();
             PreparedStatement ps = c.prepareStatement(sql)) {
@@ -37,7 +37,6 @@ public class MenuUsuario {
 
     public void removerRecurso (int id){
             String sql = "DELETE FROM tb_recursos WHERE id = ?";
-            Conexao conexao = new Conexao();
             try (Connection c = conexao.obtemConexao();
                  PreparedStatement ps = c.prepareStatement(sql)) {
 
@@ -59,7 +58,6 @@ public class MenuUsuario {
 
         String sql = "UPDATE tb_recursos SET titulo = ?, autor = ?, categoria = ?, url = ?, anotacoes = ? WHERE id = ?";
 
-        Conexao conexao = new Conexao();
         try(Connection conn = conexao.obtemConexao();
             PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -83,30 +81,6 @@ public class MenuUsuario {
         }
     }
 
-    // puxar ordenando do SQL
-    public void mostrarRecursosNaTela () throws SQLException {
-
-        String sql = "SELECT titulo, autor, categoria, url, anotacoes FROM tb_recursos";
-
-        Conexao conexao = new Conexao();
-        try(Connection conn = conexao.obtemConexao();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
-            try(ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Recurso recurso = new Recurso();
-                }
-            }
-        }
-
-        List<Recurso> listaRecursos = listarRecursos();
-        if (listaRecursos.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum recurso cadastrado ainda.");
-            return;
-        } else {
-
-        }
-        }
-
     // Método com ordenação por categoria > anotações
     public List<Recurso> listarRecursos() {
 
@@ -115,7 +89,6 @@ public class MenuUsuario {
         String sql = "SELECT id, titulo, autor, categoria, url, anotacoes "
                 + "FROM tb_recursos ORDER BY categoria ASC, titulo ASC";
 
-        Conexao conexao = new Conexao();
         try(Connection conn = conexao.obtemConexao();
             PreparedStatement ps = conn.prepareStatement(sql)) {
             try(ResultSet rs = ps.executeQuery()) {
@@ -138,5 +111,6 @@ public class MenuUsuario {
 
         return lista;
     }
+
 }
 

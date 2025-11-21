@@ -2,6 +2,7 @@ package view.admin;
 
 import model.Usuario;
 import service.MenuAdmin;
+import view.user.TelaAtualizarRecurso;
 
 import javax.swing.*;
 import java.awt.*;
@@ -113,6 +114,7 @@ public class TelaAtualizarUsuario extends JFrame {
                 campoUsuario.setText("");
                 campoSenha.setText("");
                 campoIdade.setText("");
+                telaAtualizarUsuario.dispose();
             }
         });
 

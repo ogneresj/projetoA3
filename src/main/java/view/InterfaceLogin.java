@@ -49,7 +49,7 @@ public class InterfaceLogin extends JFrame {
                 // A classe ValidarLogin e instanciada para fazer a verificação do login
                 ValidarLogin validarLogin = new ValidarLogin();
                 // Utilizando o metodo validar para testar o login e redirecionar ou para o menuAdmin() ou para menuUsuario()
-                validarLogin.validar(user, password);
+                validarLogin.realizarLogin(user, password);
             }
         });
 
