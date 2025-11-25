@@ -115,7 +115,6 @@ public class TelaCadastrarRecursos extends JFrame {
 
         botaoDesconectar.addActionListener(e -> {
                 dispose();
-                JOptionPane.showMessageDialog(null, "Você foi desconectado");
         });
 
         pack();

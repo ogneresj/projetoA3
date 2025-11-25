@@ -29,9 +29,6 @@ public class InterfaceUsuario extends Menu {
         JButton botaoEditarRecurso = new JButton("Editar Recurso");
         botaoEditarRecurso.setBounds(100, 95, 180, 20);
 
-        JButton botaoExibirPorAutor = new JButton("Exibir Recurso por Autor");
-        botaoExibirPorAutor.setBounds(100, 125, 180, 20 );
-
         JButton botaoExibirRecurso = new JButton("Exibir todos recursos");
         botaoExibirRecurso.setBounds(100, 125, 180, 20);
 
@@ -48,13 +45,6 @@ public class InterfaceUsuario extends Menu {
                 int id = Integer.parseInt(JOptionPane.showInputDialog("Qual ID do recurso que deseja atualizar: "));
                 new TelaAtualizarRecurso(id);
             }
-        });
-
-        botaoExibirPorAutor.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               String autor = JOptionPane.showInputDialog("Qual autor quer ver os recursos? ");
-           }
         });
 
         botaoExibirRecurso.addActionListener(e ->
@@ -74,7 +64,6 @@ public class InterfaceUsuario extends Menu {
         add(botaoDeletarRecurso);
         add(textMenuUsuario);
         add(textEdit);
-        // add(botaoExibirPorAutor);
         setVisible(true);
     }
 }
