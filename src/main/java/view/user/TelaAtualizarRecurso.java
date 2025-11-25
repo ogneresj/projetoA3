@@ -43,7 +43,7 @@ public class TelaAtualizarRecurso extends JFrame{
         JScrollPane scrollAnotacoes = new JScrollPane (campoAnotacoes);
 
         JButton botaoCadastrarRecurso = new JButton("Atualizar Recurso");
-        JButton botaoDesconectar = new JButton("Desconectar");
+        JButton botaoDesconectar = new JButton("Voltar");
 
         // Titulo
         gbc.gridx = 0; gbc.gridy = 0;
@@ -115,7 +115,6 @@ public class TelaAtualizarRecurso extends JFrame{
 
         botaoDesconectar.addActionListener(e -> {
             dispose();
-            JOptionPane.showMessageDialog(null, "Você foi desconectado");
         });
 
         pack();
