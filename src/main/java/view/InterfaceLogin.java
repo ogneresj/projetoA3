@@ -1,11 +1,17 @@
 package view;
 
-import service.ValidarLogin;
-import util.LimitText;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import service.ValidarLogin;
+import util.LimitText;
+import util.UsuarioLogado.Sessao;
 
 public class InterfaceLogin extends JFrame {
 
@@ -50,6 +56,7 @@ public class InterfaceLogin extends JFrame {
                 ValidarLogin validarLogin = new ValidarLogin();
                 // Utilizando o metodo validar para testar o login e redirecionar ou para o menuAdmin() ou para menuUsuario()
                 validarLogin.realizarLogin(user, password);
+                System.out.println("ID do usuário logado: " + Sessao.usuarioLogadoId);
             }
         });
 

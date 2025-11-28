@@ -7,6 +7,7 @@ public class Recurso {
     private String categoria;
     private String url;
     private String anotacoes;
+    private int usuarioID;
 
     public Recurso(String titulo, String autor, String categoria, String url, String anotacoes) {
         this.titulo = titulo;
@@ -39,6 +40,14 @@ public class Recurso {
 
     public String getAnotacoes() { return anotacoes; }
     public void setAnotacoes(String anotacoes) { this.anotacoes = anotacoes; }
+
+    public int getUsuarioID() {
+        return usuarioID;
+    }
+
+    public void setUsuarioID(int usuarioID) {
+        this.usuarioID = usuarioID;
+    }
 
     @Override
     public String toString() {

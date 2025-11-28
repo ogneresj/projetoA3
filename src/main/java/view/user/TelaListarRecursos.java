@@ -1,14 +1,17 @@
 package view.user;
 
+import java.awt.BorderLayout;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import model.Recurso;
 import service.MenuUsuario;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.List;
 
 public class TelaListarRecursos extends JFrame {
 
@@ -26,10 +29,10 @@ public class TelaListarRecursos extends JFrame {
         List<Recurso> recursos = menuUsuario.listarRecursos();
 
         String[] colunas = {
-                "ID", "Título", "Autor", "Categoria", "URL", "Anotações"
+                "ID", "Título", "Autor", "Categoria", "URL", "Anotações", "Usuário ID"
         };
 
-        Object[][] dados = new Object[recursos.size()][6];
+        Object[][] dados = new Object[recursos.size()][7];
 
         for (int i = 0; i < recursos.size(); i++) {
             Recurso r = recursos.get(i);
@@ -39,6 +42,7 @@ public class TelaListarRecursos extends JFrame {
             dados[i][3] = r.getCategoria();
             dados[i][4] = r.getUrl();
             dados[i][5] = r.getAnotacoes();
+            dados[i][6] = r.getUsuarioID();
         }
 
         JTable tabela = new JTable(dados, colunas);

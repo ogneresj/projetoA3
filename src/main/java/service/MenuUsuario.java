@@ -1,15 +1,17 @@
 package service;
 
-import database.Conexao;
-import model.Recurso;
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import database.Conexao;
+import model.Recurso;
+import util.UsuarioLogado;
 
 public class MenuUsuario {
 
@@ -17,7 +19,7 @@ public class MenuUsuario {
 
     public void cadastrarRecurso(Recurso recurso) {
 
-        String sql = "INSERT INTO tb_recursos (titulo, autor, categoria, url, anotacoes) values (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_recursos (titulo, autor, categoria, url, anotacoes, usuario_id) values (?, ?, ?, ?, ?, ?)";
 
         try(Connection c = conexao.obtemConexao();
             PreparedStatement ps = c.prepareStatement(sql)) {
@@ -27,6 +29,8 @@ public class MenuUsuario {
             ps.setString(3, recurso.getCategoria());
             ps.setString(4, recurso.getUrl());
             ps.setString(5, recurso.getAnotacoes());
+
+            ps.setInt(6, UsuarioLogado.Sessao.usuarioLogadoId);
 
             ps.executeUpdate();
 
@@ -86,7 +90,7 @@ public class MenuUsuario {
 
         List<Recurso> lista = new ArrayList<>();
 
-        String sql = "SELECT id, titulo, autor, categoria, url, anotacoes "
+        String sql = "SELECT id, titulo, autor, categoria, url, anotacoes, usuario_id "
                 + "FROM tb_recursos ORDER BY categoria ASC, titulo ASC";
 
         try(Connection conn = conexao.obtemConexao();
@@ -100,6 +104,8 @@ public class MenuUsuario {
                     recurso.setCategoria(rs.getString("categoria"));
                     recurso.setUrl(rs.getString("url"));
                     recurso.setAnotacoes(rs.getString("anotacoes"));
+
+                    recurso.setUsuarioID(rs.getInt("usuario_id"));
 
                     lista.add(recurso);
                 }

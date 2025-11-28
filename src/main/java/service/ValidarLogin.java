@@ -1,17 +1,24 @@
 package service;
 
-import database.Conexao;
-import view.admin.InterfaceAdmin;
-import view.user.InterfaceUsuario;
-import org.mindrot.jbcrypt.BCrypt;
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
+import org.mindrot.jbcrypt.BCrypt;
+
+import database.Conexao;
+import model.Usuario;
+import util.UsuarioLogado.Sessao;
+import view.admin.InterfaceAdmin;
+import view.user.InterfaceUsuario;
+
 
 public class ValidarLogin {
+
+    Usuario usuario = new Usuario();
 
     public void realizarLogin(String nomeUsuario, String senha) {
         String tipoUsuarioLogado = verificandoLogin(nomeUsuario, senha);
@@ -28,7 +35,7 @@ public class ValidarLogin {
     }
 
     public String[] buscarSenha(String nomeUsuario) {
-        String sql = "SELECT password, tipoUsuario FROM tb_usuarios WHERE nome = ?";
+        String sql = "SELECT id, password, tipoUsuario FROM tb_usuarios WHERE nome = ?";
 
         Conexao conexao = new Conexao();
 
@@ -39,6 +46,7 @@ public class ValidarLogin {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return new String[]{
+                            rs.getString("id"),
                             rs.getString("password"),
                             String.valueOf(rs.getBoolean("tipoUsuario"))
                     };
@@ -59,10 +67,12 @@ public class ValidarLogin {
             return null;
         }
 
-        String senhaHashBanco = credenciais[0];
-        String tipoUsuario = credenciais[1];
+        String idUsuario = credenciais[0];
+        String senhaHashBanco = credenciais[1];
+        String tipoUsuario = credenciais[2];
 
         if (BCrypt.checkpw(senhaDigitada, senhaHashBanco)) {
+            Sessao.usuarioLogadoId = Integer.parseInt(idUsuario);
             return tipoUsuario;
         } else {
             return null;
