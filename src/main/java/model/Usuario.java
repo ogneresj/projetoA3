@@ -12,6 +12,8 @@ public class Usuario {
     private String senha;
     private List<String> interesses;
 
+    private String usuario;
+
     public Usuario(String nome, int idade, boolean admin, String senha) {
         this.nome = nome;
         this.idade = idade;
@@ -68,6 +70,14 @@ public class Usuario {
 
     public void setInteresses(List<String> interesses) {
         this.interesses = interesses;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     @Override

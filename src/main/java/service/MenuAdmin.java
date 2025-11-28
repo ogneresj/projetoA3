@@ -6,8 +6,13 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 // JFrame é a janela principol
 public class MenuAdmin {
@@ -128,6 +133,38 @@ public class MenuAdmin {
 
         } catch (SQLException e) {
             System.out.println("Erro ao deletar usuário: " + e.getMessage());
+        }
+    }
+
+    public Usuario buscarUsuarioPorId(int id) throws SQLException {
+        String sql = "SELECT id, nome, idade, tipoUsuario, password, interesses FROM tb_usuarios WHERE id = ?";
+
+        try (Connection conn = new Conexao().obtemConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String usuario = rs.getString("nome");
+                    int idade = rs.getInt("idade");
+                    boolean isAdmin = rs.getBoolean("tipoUsuario");
+                    String senha = rs.getString("password");
+                    String interessesStr = rs.getString("interesses");
+
+                    Usuario u = new Usuario(usuario, idade, isAdmin, senha);
+
+                    if (interessesStr != null && !interessesStr.isEmpty()) {
+                        String[] parts = interessesStr.split(",");
+                        List<String> interesses = new ArrayList<>(Arrays.asList(parts));
+                        u.setInteresses(interesses);
+                    }
+
+                    return u;
+                } else {
+                    return null;
+                }
+            }
         }
     }
 }

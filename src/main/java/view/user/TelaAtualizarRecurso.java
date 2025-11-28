@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 
 public class TelaAtualizarRecurso extends JFrame{
 
+    MenuUsuario menuUsuario = new MenuUsuario();
+
     public TelaAtualizarRecurso(int id) {
 
         setTitle("Atualizar Recurso");
@@ -84,6 +86,28 @@ public class TelaAtualizarRecurso extends JFrame{
         painel.add(botoes, gbc);
 
         add(painel);
+
+        Recurso recursoExistente = null;
+        try {
+            recursoExistente = menuUsuario.buscarRecursoPorId(id);
+        } catch (Exception ex) {
+            // trate conforme a arquitetura do projeto (logs, mensagem ao usuário, etc.)
+            JOptionPane.showMessageDialog(null, "Erro ao carregar recurso: " + ex.getMessage());
+            dispose();
+            return;
+        }
+
+        if (recursoExistente == null) {
+            JOptionPane.showMessageDialog(null, "Recurso não encontrado.");
+            dispose();
+            return;
+        }
+
+        // preencher campos com os dados carregados
+        campoTitulo.setText(recursoExistente.getTitulo());
+        campoAutor.setText(recursoExistente.getAutor());
+        campoURL.setText(recursoExistente.getUrl() != null ? recursoExistente.getUrl() : "");
+        campoAnotacoes.setText(recursoExistente.getAnotacoes());
 
         // Execução dos botões e lógica de campos
         botaoCadastrarRecurso.addActionListener(new ActionListener() {

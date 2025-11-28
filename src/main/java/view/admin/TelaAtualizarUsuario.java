@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class TelaAtualizarUsuario extends JFrame {
 
+    MenuAdmin menuAdmin = new MenuAdmin();
     private Set<String> interessesSelecionados = new HashSet<>();
 
     public TelaAtualizarUsuario(int id) {
@@ -59,6 +60,25 @@ public class TelaAtualizarUsuario extends JFrame {
 
         painel.add(botaoAtualizarUsuario);
         painel.add(botaoCancelar);
+
+        Usuario usuarioExistente = null;
+        try {
+            usuarioExistente = menuAdmin.buscarUsuarioPorId(id);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar usuário: " + ex.getMessage());
+            telaAtualizarUsuario.dispose();
+            return;
+        }
+
+        campoUsuario.setText(usuarioExistente.getNome());
+        campoIdade.setText(String.valueOf(usuarioExistente.getIdade()));
+        tipoList.setSelectedItem(usuarioExistente.isAdmin() ? "Admin" : "Usuário Comum");
+
+        if (usuarioExistente.getInteresses() != null) {
+            interessesSelecionados = new HashSet<>(usuarioExistente.getInteresses());
+        } else {
+            interessesSelecionados = new HashSet<>();
+        }
 
         botaoCategoria.addActionListener(e -> {
             String selectedItem = (String) tipoList.getSelectedItem();

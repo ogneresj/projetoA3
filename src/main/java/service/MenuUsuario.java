@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -116,6 +117,33 @@ public class MenuUsuario {
         }
 
         return lista;
+    }
+
+    public Recurso buscarRecursoPorId(int id) throws SQLException {
+        String sql = "SELECT id, titulo, autor, categoria, url, anotacoes, usuario_id FROM tb_recursos WHERE id = ?";
+
+        try (Connection conn = conexao.obtemConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Recurso r = new Recurso();
+                    // Se sua coluna id for numérica, converta para String conforme o modelo
+                    r.setId(rs.getString("id"));
+                    r.setTitulo(rs.getString("titulo"));
+                    r.setAutor(rs.getString("autor"));
+                    r.setCategoria(rs.getString("categoria"));
+                    r.setUrl(rs.getString("url"));
+                    r.setAnotacoes(rs.getString("anotacoes"));
+                    r.setUsuarioID(rs.getInt("usuario_id"));
+                    return r;
+                } else {
+                    return null;
+                }
+            }
+        }
     }
 
 }
